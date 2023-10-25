@@ -1,4 +1,4 @@
-package com.example.hangeunmarket
+package com.example.hangeunmarket.ui
 
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -6,9 +6,8 @@ import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.hangeunmarket.R
 import com.example.hangeunmarket.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
