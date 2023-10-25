@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.hangeunmarket.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="홈"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.hangeunmarket.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_chat"
+        android:name="com.example.hangeunmarket.ui.chat.ChatFragment"
+        android:label="채팅"
+        tools:layout="@layout/fragment_chat" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.hangeunmarket.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_mypage"
+        android:name="com.example.hangeunmarket.ui.mypage.MyPageFragment"
+        android:label="마이 페이지"
+        tools:layout="@layout/fragment_mypage" />
 </navigation>

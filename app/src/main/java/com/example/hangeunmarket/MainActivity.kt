@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
     // 허용받을 권한들
     private val permissions = arrayOf(
         android.Manifest.permission.CAMERA,
