@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.hangeunmarket.databinding.FragmentMypageBinding
@@ -23,13 +22,11 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val notificationsViewModel =
-            ViewModelProvider(this).get(MyPageViewModel::class.java)
+            ViewModelProvider(this)[MyPageViewModel::class.java]
 
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
