@@ -1,22 +1,33 @@
 package com.example.hangeunmarket.ui.chat.recyclerview
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.R
 import com.example.hangeunmarket.ui.home.HomeFragment
 import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
+import java.util.Random
 
 // 4.아이템을 유지/관리하는 Adapter
 class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
     RecyclerView.Adapter<ChattingRoomItemRecyclerViewAdapter.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
 
     private var chattingRoomItems: List<ChattingRoomItem> = emptyList() //화면에 보여줄 데이터들
+
+    val predefinedColors = listOf(
+        Color.parseColor("#FFC107"), // Amber
+        Color.parseColor("#FF5722"), // Deep Orange
+        Color.parseColor("#4CAF50"), // Green
+        Color.parseColor("#03A9F4")  // Light Blue
+    )
+
 
     //(2) ViewHolder패턴 => View를 Holder에 넣어두었다가 재사용을 하기 위함
     //=> itemView는 onCreateViewHolder에서 전달받은 아이템 뷰의 레이아웃에 해당
@@ -27,10 +38,13 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
         var chatItemImage : ImageView // 채팅 상대 아이콘 이미지
         var chatUserName : TextView // 상대방 이름
         var lastChat : TextView // 마지막 채팅 내용
+        var cardView : CardView // 카드 뷰
+
         init { //innerClass의 생성자에 해당 => 뷰의 레이아웃 가져오기 => 화면에 붙이기 위한 하나의 뷰를 만드는 과정에 해당
             chatItemImage = itemView.findViewById(R.id.iv_chat_user)
             chatUserName = itemView.findViewById(R.id.tv_id)
             lastChat = itemView.findViewById(R.id.tv_last_chat)
+            cardView = itemView.findViewById(R.id.cardview_chat_user)
 
 //            아이템 클릭에 대한 이벤트 정의
 //            itemView.setOnClickListener {
@@ -62,6 +76,8 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
 //        holder.chatItemImage
         holder.chatUserName.text = chattingRoomItem.chatUserName
         holder.lastChat.text = chattingRoomItem.lastChat
+
+        holder.cardView.setCardBackgroundColor(predefinedColors[chattingRoomItem.chatItemImage])
     }
 
 

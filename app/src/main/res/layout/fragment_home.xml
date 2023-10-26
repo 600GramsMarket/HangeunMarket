@@ -37,6 +37,12 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginLeft="3dp"
             android:src="@drawable/baseline_expand_more_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

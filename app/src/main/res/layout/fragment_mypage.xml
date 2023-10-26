@@ -7,6 +7,7 @@
     tools:context=".ui.mypage.MyPageFragment">
 
     <LinearLayout
+        android:id="@+id/layout_tool_bar"
         android:layout_width="0dp"
         android:layout_height="50dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -15,5 +16,50 @@
         android:orientation="vertical">
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal">
+
+
+        <!--    이미지의 테두리를 둥글게 적용시키기 위해 cardview를 사용하였음-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_my_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="@color/gray">
+
+            <ImageView
+                android:id="@+id/iv_my_profile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_meat_logo"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최 강"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"/>
+
+    </LinearLayout>
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

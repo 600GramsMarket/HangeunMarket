@@ -66,15 +66,15 @@ class ChatFragment : Fragment() {
 
     private fun initChattingRoomItemDTOArray(): Array<ChattingRoomItem> {
         return arrayOf(
-            ChattingRoomItem("image1","User1","좋은 물건 감사합니다~!"),
-            ChattingRoomItem("image2","User2","넵 상상관에서 뵐게요!"),
-            ChattingRoomItem("image3","User3","네고 가능할까요??"),
-            ChattingRoomItem("image4","User4","넵 알겠습니다!"),
-            ChattingRoomItem("image5","User5","네네"),
-            ChattingRoomItem("image6","User6","곧 있으면 도착해요!"),
-            ChattingRoomItem("image6","User7","넵"),
-            ChattingRoomItem("image6","User8","네ㅎㅎ 감사합니다"),
-            ChattingRoomItem("image6","User9","네 다음주에 봬요!"),
+            ChattingRoomItem(0,"User1","좋은 물건 감사합니다~!"),
+            ChattingRoomItem(2,"User2","넵 상상관에서 뵐게요!"),
+            ChattingRoomItem(1,"User3","네고 가능할까요??"),
+            ChattingRoomItem(0,"User4","넵 알겠습니다!"),
+            ChattingRoomItem(3,"User5","네네"),
+            ChattingRoomItem(2,"User6","곧 있으면 도착해요!"),
+            ChattingRoomItem(0,"User7","넵"),
+            ChattingRoomItem(3,"User8","네ㅎㅎ 감사합니다"),
+            ChattingRoomItem(1,"User9","네 다음주에 봬요!"),
         )
     }
 
