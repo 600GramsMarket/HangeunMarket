@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="90dp">
 
-
     <!--    이미지의 테두리를 둥글게 적용시키기 위해 cardview를 사용하였음-->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_chat_user"
