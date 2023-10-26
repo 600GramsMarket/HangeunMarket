@@ -44,7 +44,7 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
         //화면에 뷰를 붙이기 위해 inflater가 필요
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         //아이템 뷰 레이아웃 가져오기
-        val view = inflater.inflate(R.layout.item_for_sale, parent, false)
+        val view = inflater.inflate(R.layout.item_chatting_room, parent, false)
 
         return ViewHolder(view)
     }

@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="16dp"
             android:text="채팅방"
             android:textSize="20sp"
             android:textColor="@color/black"
