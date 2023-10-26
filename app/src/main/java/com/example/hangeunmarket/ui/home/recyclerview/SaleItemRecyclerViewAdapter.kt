@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.R
 import com.example.hangeunmarket.ui.home.HomeFragment
 
 // 4.아이템을 유지/관리하는 Adapter
-class SaleItemRecyclerViewAdapter(var saleItems: Array<SaleItem>, var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
+class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
     RecyclerView.Adapter<SaleItemRecyclerViewAdapter.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
+
+    private var saleItems: List<SaleItem> = emptyList() //화면에 보여줄 데이터들
 
     //(2) ViewHolder패턴 => View를 Holder에 넣어두었다가 재사용을 하기 위함
     //=> itemView는 onCreateViewHolder에서 전달받은 아이템 뷰의 레이아웃에 해당
@@ -29,17 +32,8 @@ class SaleItemRecyclerViewAdapter(var saleItems: Array<SaleItem>, var context: C
             salePrice = itemView.findViewById(R.id.txt_sale_price)
             salePlace = itemView.findViewById(R.id.txt_sale_place)
 
-            //아이템 클릭에 대한 이벤트 정의
+//            아이템 클릭에 대한 이벤트 정의
 //            itemView.setOnClickListener {
-//                AlertDialog.Builder(context).apply {
-//                    var position = adapterPosition // 클릭한 값이 몇번째에 위치한 값인지
-//                    var saleItem = saleItems[position] // 클릭한 그룹 정보 받아오기
-//                    setTitle(saleItem.saleTitle)
-//                    setPositiveButton("OK") { dialog, which ->
-//                        Toast.makeText(context, "OK Button Click", Toast.LENGTH_SHORT).show()
-//                    }
-//                    show()
-//                }
 //            }
         }
     }
@@ -55,6 +49,11 @@ class SaleItemRecyclerViewAdapter(var saleItems: Array<SaleItem>, var context: C
         return ViewHolder(view)
     }
 
+
+    fun setSaleItems(items: List<SaleItem>) {
+        this.saleItems = items
+        notifyDataSetChanged()
+    }
 
     //(3)
     //itemView에 Array<SaleItem>의 값을 할당함

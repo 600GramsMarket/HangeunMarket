@@ -1,19 +1,14 @@
 package com.example.hangeunmarket.ui.home
 
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hangeunmarket.R
 import com.example.hangeunmarket.databinding.FragmentHomeBinding
 import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
 import com.example.hangeunmarket.ui.home.recyclerview.SaleItemRecyclerViewAdapter
@@ -27,24 +22,34 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     //recycler view layout
-    lateinit var recyclerViewSaleItem : RecyclerView
+    private lateinit var recyclerViewSaleItem : RecyclerView
 
     //recycler view adapter
-    lateinit var recyclerViewSaleItemAdapter : SaleItemRecyclerViewAdapter
+    private lateinit var recyclerViewSaleItemAdapter : SaleItemRecyclerViewAdapter
+
+    //HomeFragment ViewModel
+    private val homeViewModel by lazy {
+        ViewModelProvider(this)[HomeViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         recyclerViewSaleItem = binding.recyclerviewSaleItem
-        var saleItems = initGroupDTOArray() //더미데이터 생성
-        setAdapter(saleItems) //어댑터 붙이기
+
+        // 더미데이터를 ViewModel의 LiveData에 설정
+        homeViewModel.saleItemsLiveData.value = initSaleItemDTOArray().toList()
+
+        // LiveData를 관찰하여 어댑터 데이터 업데이트
+        homeViewModel.saleItemsLiveData.observe(viewLifecycleOwner, Observer { items ->
+            recyclerViewSaleItemAdapter.setSaleItems(items)
+        })
+
+        setAdapter() //어댑터 붙이기
 
 
         return binding.root
@@ -58,7 +63,7 @@ class HomeFragment : Fragment() {
     var salePrice : String, // txt_sale_price 판매 가격)
     * */
 
-    fun initGroupDTOArray(): Array<SaleItem> {
+    private fun initSaleItemDTOArray(): Array<SaleItem> {
         return arrayOf(
             SaleItem("상상부기","상상부기 인형 팝니다!","상상관","3,000원"),
             SaleItem("상상부기","상상부기 인형 팝니다!","상상관","4,000원"),
@@ -73,11 +78,9 @@ class HomeFragment : Fragment() {
     }
 
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
-    fun setAdapter(groups: Array<SaleItem>){
+    private fun setAdapter(){
         recyclerViewSaleItem.layoutManager = LinearLayoutManager(this.context)
-        //어탭더 생성
-        //it(fragment의 context)이 null일수도 있음 => 검사 필요
-        recyclerViewSaleItemAdapter = activity?.let { SaleItemRecyclerViewAdapter(groups, it) }!!
+        recyclerViewSaleItemAdapter = activity?.let { SaleItemRecyclerViewAdapter(it) }!!
         recyclerViewSaleItem.adapter = recyclerViewSaleItemAdapter
     }
 

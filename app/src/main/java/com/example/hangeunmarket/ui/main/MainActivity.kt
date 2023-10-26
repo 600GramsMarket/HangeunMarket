@@ -1,4 +1,4 @@
-package com.example.hangeunmarket.ui
+package com.example.hangeunmarket.ui.main
 
 import android.content.pm.PackageManager
 import android.os.Bundle

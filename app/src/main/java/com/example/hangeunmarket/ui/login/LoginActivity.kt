@@ -11,7 +11,7 @@ import android.text.style.StyleSpan
 import androidx.core.content.ContextCompat
 import com.example.hangeunmarket.R
 import com.example.hangeunmarket.databinding.ActivityLoginBinding
-import com.example.hangeunmarket.ui.MainActivity
+import com.example.hangeunmarket.ui.main.MainActivity
 
 //로그인을 수행할 엑티비티 => 로그인 정보가 이미 앱에 있다면 자동 로그인?(나중에 구현할 것)
 class LoginActivity : AppCompatActivity() {

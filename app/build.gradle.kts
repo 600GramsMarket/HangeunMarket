@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-
     //room dependencies
     val roomVersion = "2.5.2"
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -49,9 +48,11 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
 
-
     //view model dependency
     implementation("androidx.activity:activity-ktx:1.3.1")
+
+    //materail button
+    implementation("com.google.android.material:material:1.10.0")
 
 
     implementation("androidx.core:core-ktx:1.9.0")
