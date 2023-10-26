@@ -31,6 +31,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent) //시스템에 요청 전송
         }
 
+        setTitleLogoDesign() // 글자 부분 색상 변경 '한' '근' 만 붉은 색으로
+    }
+
+
+    private fun setTitleLogoDesign(){
         val logoTitle = binding.tvTitleLogo
         // 텍스트 가져오기
         val text = "한성대 근처에서 직거래"
