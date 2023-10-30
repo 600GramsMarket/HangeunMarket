@@ -8,12 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.R
-import com.example.hangeunmarket.ui.home.HomeFragment
-import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
-import java.util.Random
 
 // 4.아이템을 유지/관리하는 Adapter
 class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함

@@ -29,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
             //의도 : LoginActivity에서 MainActivity로 화면 전환
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent) //시스템에 요청 전송
+
+            //넘어간 이후에는 현재 엑티비티 종료(백스택을 통해 되돌아 오는것 방지)
+            finish()
         }
 
         setTitleLogoDesign() // 글자 부분 색상 변경 '한' '근' 만 붉은 색으로
