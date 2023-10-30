@@ -18,7 +18,7 @@
         android:theme="@style/Theme.HangeunMarket"
         tools:targetApi="31">
         <activity
-            android:name=".ui.salepost.SaleActivity"
+            android:name=".ui.salepost.SaleWritingActivity"
             android:exported="false" />
         <!-- 시작 엑티비티는 로그인 엑티비티로 지정 -->
         <activity

@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.databinding.FragmentHomeBinding
 import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
 import com.example.hangeunmarket.ui.home.recyclerview.SaleItemRecyclerViewAdapter
-import com.example.hangeunmarket.ui.main.MainActivity
-import com.example.hangeunmarket.ui.salepost.SaleActivity
+import com.example.hangeunmarket.ui.salepost.SaleWritingActivity
 
 class HomeFragment : Fragment() {
 
@@ -55,7 +54,7 @@ class HomeFragment : Fragment() {
         setAdapter() //어댑터 붙이기
 
         binding.btnSalesWriting.setOnClickListener {
-            var intent = Intent(this@HomeFragment.activity,SaleActivity::class.java)
+            var intent = Intent(this@HomeFragment.activity,SaleWritingActivity::class.java)
             startActivity(intent) //SaleActivity로 엑티비티 전환
         }
 

@@ -23,6 +23,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater);
         setContentView(binding.root)
 
+        //시작하기 = 회원가입에 해당
+        //회원가입 페이지 작성후 프레그먼트 전환 로직 필요
         binding.btnSignUp.setOnClickListener {
             //0. Intent 생성(요청 생성)
             //1. 현재 앱의 Context와 이동할 엑티비티의 클래스
@@ -33,6 +35,13 @@ class LoginActivity : AppCompatActivity() {
             //넘어간 이후에는 현재 엑티비티 종료(백스택을 통해 되돌아 오는것 방지)
             finish()
         }
+
+        //이미 계정이 있나요? 로그인
+        //로그인 버튼 클릭시 아이디,비밀번호 입력창으로 연결
+        binding.textButtonSignIn.setOnClickListener{
+
+        }
+
 
         setTitleLogoDesign() // 글자 부분 색상 변경 '한' '근' 만 붉은 색으로
     }
