@@ -112,8 +112,20 @@
                 android:textSize="25sp"
                 android:textColor="@color/black" />
 
+            <TextView
+                android:id="@+id/tv_sale_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="판매 희망 장소 : 상상관"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_sale_title" />
 
             <TextView
+                android:id="@+id/tv_sale_item_info"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginHorizontal="20dp"
@@ -123,8 +135,7 @@
                 android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sale_title" />
-
+                app:layout_constraintTop_toBottomOf="@id/tv_sale_place" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
