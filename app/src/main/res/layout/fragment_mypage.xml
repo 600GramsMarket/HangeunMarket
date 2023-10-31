@@ -37,13 +37,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout_profile"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_my_info"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:layout_constraintTop_toBottomOf="@id/constraint_tool_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/shape_edit"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"
         android:orientation="horizontal">
 
         <!--    이미지의 테두리를 둥글게 적용시키기 위해 cardview를 사용하였음-->
@@ -51,6 +54,9 @@
             android:id="@+id/cardview_my_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginLeft="15dp"
             app:cardCornerRadius="30dp"
             app:cardBackgroundColor="@color/gray">
@@ -65,14 +71,190 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/tv_my_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최 강"
+            app:layout_constraintTop_toTopOf="@id/cardview_my_profile"
+            app:layout_constraintStart_toEndOf="@id/cardview_my_profile"
+            android:text="y2hscmtk"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="25dp"
+            android:textSize="15dp"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_my_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_id"
+            app:layout_constraintStart_toStartOf="@id/tv_my_id"
+            android:text="최강"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IT공과대학 19학번"
+            app:layout_constraintStart_toStartOf="@id/tv_my_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constarint_my_account"
+        android:layout_width="0dp"
+        android:layout_height="185dp"
+        app:layout_constraintTop_toBottomOf="@id/constraint_my_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/shape_edit"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:text="계정"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="15dp"
+            android:text="학교 인증"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="15dp"
+            android:text="비밀번호 변경"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="15dp"
+            android:text="이메일 변경"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constarint_my_account2"
+        android:layout_width="0dp"
+        android:layout_height="285dp"
+        app:layout_constraintTop_toBottomOf="@id/constarint_my_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/shape_edit"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:text="설정"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="15dp"
+            android:text="닉네임 설정"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_6"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="15dp"
+            android:text="프로필 이미지 변경"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_7"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="15dp"
+            android:text="이용 제한 내역"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_8"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="15dp"
+            android:text="쪽지 설정"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_9"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="15dp"
+            android:text="커뮤니티 이용 규칙"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
