@@ -63,6 +63,11 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
         holder.saleTitle.text = saleItem.saleTitle
         holder.salePlace.text = saleItem.salePlace
         holder.salePrice.text = saleItem.salePrice
+        //val imageName = "img_note_$imageNumber"
+        val imageName = saleItem.saleItemImage //String
+        //이미지의 ResourceId얻어오기(현재는 앱에 넣어둔 이미지를 배경 이미지로 삼음)
+        val resId = holder.itemView.context.resources.getIdentifier(imageName, "drawable", holder.itemView.context.packageName)
+        holder.saleItemImage.setImageResource(resId)
     }
 
 
