@@ -114,7 +114,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_1"
+            android:id="@+id/tv_verify_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -127,10 +127,10 @@
             android:textSize="22dp"/>
 
         <TextView
-            android:id="@+id/tv_2"
+            android:id="@+id/tv_change_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_1"
+            app:layout_constraintTop_toBottomOf="@id/tv_verify_school"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
@@ -140,10 +140,10 @@
 
 
         <TextView
-            android:id="@+id/tv_3"
+            android:id="@+id/tv_change_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_2"
+            app:layout_constraintTop_toBottomOf="@id/tv_change_password"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="14dp"
             android:layout_marginStart="15dp"
@@ -155,7 +155,7 @@
             android:id="@+id/tv_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_3"
+            app:layout_constraintTop_toBottomOf="@id/tv_change_email"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="14dp"
             android:layout_marginStart="15dp"
@@ -179,7 +179,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_5"
+            android:id="@+id/tv_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -192,10 +192,10 @@
             android:textSize="22dp"/>
 
         <TextView
-            android:id="@+id/tv_6"
+            android:id="@+id/tv_setting_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_5"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="18dp"
             android:layout_marginStart="15dp"
@@ -205,10 +205,10 @@
 
 
         <TextView
-            android:id="@+id/tv_7"
+            android:id="@+id/tv_change_profile_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_6"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_nickname"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
@@ -220,7 +220,7 @@
             android:id="@+id/tv_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_7"
+            app:layout_constraintTop_toBottomOf="@id/tv_change_profile_image"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
@@ -229,7 +229,7 @@
             android:textSize="16dp"/>
 
         <TextView
-            android:id="@+id/tv_9"
+            android:id="@+id/tv_setting_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_8"
@@ -241,10 +241,10 @@
             android:textSize="16dp"/>
 
         <TextView
-            android:id="@+id/tv_10"
+            android:id="@+id/tv_communitiy_role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_9"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_note"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
