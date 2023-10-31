@@ -21,8 +21,6 @@ class MyPageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this)[MyPageViewModel::class.java]
 
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
 
