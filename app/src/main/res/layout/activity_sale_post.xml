@@ -60,14 +60,15 @@
 
                     <ImageView
                         android:id="@+id/iv_user"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:scaleType="centerCrop"
+                        android:layout_margin="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/img_meat_logo"/>
+                        android:src="@drawable/img_meat_logo3"/>
 
                 </androidx.cardview.widget.CardView>
 
