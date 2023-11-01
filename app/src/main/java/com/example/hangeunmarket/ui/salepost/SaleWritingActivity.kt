@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.example.hangeunmarket.R
 import com.example.hangeunmarket.databinding.ActivitySaleWritingBinding
 
@@ -48,6 +49,11 @@ class SaleWritingActivity : AppCompatActivity() {
 
             startActivity(intent) //작성한 글 확인을 위해 넘어가기
             finish() //현재 엑티비티는 종료처리
+        }
+
+        var backBtn = findViewById<ImageView>(R.id.iv_back)
+        backBtn.setOnClickListener {
+            finish() // 백 스택
         }
     }
 }

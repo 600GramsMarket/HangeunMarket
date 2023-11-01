@@ -30,6 +30,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/iv_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/tv_place"

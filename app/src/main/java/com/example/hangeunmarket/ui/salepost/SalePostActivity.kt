@@ -10,12 +10,11 @@ import com.example.hangeunmarket.R
 
 //판매 글 보기와 관련된 로직 처리
 class SalePostActivity : AppCompatActivity() {
-
-/*tv_sale_title
-* tv_sale_place
-* tv_sale_item_info
-* tv_sale_price //판매 가격
-* */
+    /*tv_sale_title
+    * tv_sale_place
+    * tv_sale_item_info
+    * tv_sale_price //판매 가격
+    * */
 
     private lateinit var tvSaleTitle : TextView
     private lateinit var tvSalePlace : TextView
@@ -30,7 +29,6 @@ class SalePostActivity : AppCompatActivity() {
         tvSalePlace = findViewById(R.id.tv_sale_place)
         tvSaleItemInfo = findViewById(R.id.tv_sale_item_info)
         tvSalePrice = findViewById(R.id.tv_sale_price)
-
 
         /*
         *   intent.putExtra("saleTitle",saleTitle.text)
@@ -48,7 +46,7 @@ class SalePostActivity : AppCompatActivity() {
 
         //화면에 정보 뿌리기
         tvSaleTitle.text = saleTitle
-        tvSalePlace.text = salePlace
+        tvSalePlace.text = "판매장소 : ${salePlace}"
         tvSaleItemInfo.text = saleItemInfo
         tvSalePrice.text = salePrice
 

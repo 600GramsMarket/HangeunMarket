@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item_sangsang"
+        android:title="상상관"
+        />
+    <item
+        android:id="@+id/menu_item_gonghak"
+        android:title="공학관"
+        />
+    <item
+        android:id="@+id/menu_item_taemgu"
+        android:title="탐구관"
+        />
+    <item
+        android:id="@+id/menu_item_insung"
+        android:title="인성관"
+        />
+</menu>
