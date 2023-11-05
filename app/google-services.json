@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "371972387684",
+    "project_id": "hangeunmarket",
+    "storage_bucket": "hangeunmarket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371972387684:android:46f547dc652e62a1b70071",
+        "android_client_info": {
+          "package_name": "com.example.hangeunmarket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9YD6r_edkPAuRBWIfWaPuWom2hPty3O0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
