@@ -2,12 +2,10 @@ package com.example.hangeunmarket.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -49,11 +47,13 @@ class HomeFragment : Fragment() {
         recyclerViewSaleItem = binding.recyclerviewSaleItem
 
         // 더미데이터를 ViewModel의 LiveData에 설정
-        homeViewModel.saleItemsLiveData.value = initSaleItemDTOArray().toList()
+        //homeViewModel.saleItemsLiveData.value = initSaleItemDTOArray().toList()
 
         // LiveData를 관찰하여 어댑터 데이터 업데이트
         homeViewModel.saleItemsLiveData.observe(viewLifecycleOwner, Observer { items ->
-            recyclerViewSaleItemAdapter.setSaleItems(items)
+            if (items != null) {
+                recyclerViewSaleItemAdapter.setSaleItems(items)
+            }
         })
 
         setAdapter() //어댑터 붙이기
@@ -82,6 +82,9 @@ class HomeFragment : Fragment() {
             when (item.itemId) {
                 R.id.menu_item_sangsang -> {
                     // "상상관" 클릭시
+                    // 데이터모델에서 모델 데이터를 변경하도록 설정
+                    homeViewModel.changeSaleItemForSelectedPlace() //상상관으로 변경
+
                     true
                 }
                 R.id.menu_item_gonghak -> {
@@ -114,15 +117,15 @@ class HomeFragment : Fragment() {
     private fun initSaleItemDTOArray(): Array<SaleItem> {
         return arrayOf(
             SaleItem(0,"img_for_sale_default","상상부기 인형팝니다~!","상상관","2,000원"),
-            SaleItem(1,"sale_item1","엑셀 2013개정판, CRM 전문가 교재 팝니다.","상상관","12,000원"),
-            SaleItem(2,"sale_item2","에듀윌 하루 행정학 싸게 올려요~","상상관","4,000원"),
+            SaleItem(1,"sale_item1","엑셀 2013개정판, CRM 전문가 교재 팝니다.","탐구관","12,000원"),
+            SaleItem(2,"sale_item2","에듀윌 하루 행정학 싸게 올려요~","공학관","4,000원"),
             SaleItem(3,"sale_item3","안 쓰는 한성대 경영 교재 팔아요~","상상관","5,000원"),
-            SaleItem(4,"sale_item4","나일론 자켓 준지 22ss 팝니다.","상상관","6,000원"),
-            SaleItem(5,"sale_item5","스타벅스 오늘도 달콤하게(ICE)","상상관","10,200원"),
+            SaleItem(4,"sale_item4","나일론 자켓 준지 22ss 팝니다.","탐구관","6,000원"),
+            SaleItem(5,"sale_item5","스타벅스 오늘도 달콤하게(ICE)","탐구관","10,200원"),
             SaleItem(6,"sale_item6","소니 미러리스 A7R4 바디 팝니당","상상관","2,500,000원"),
-            SaleItem(7,"sale_item7","아이소이 모이스취 닥터 앰플","상상관","10,000원"),
+            SaleItem(7,"sale_item7","아이소이 모이스취 닥터 앰플","공학관","10,000원"),
             SaleItem(8,"sale_item8","슈펜 & 핏더사이즈 콜라보 클로그 260","상상관","40,000원"),
-            SaleItem(9,"sale_item9","삶과 꿈 교재 팝니다!!","상상관","11,000원"),
+            SaleItem(9,"sale_item9","삶과 꿈 교재 팝니다!!","공학관","11,000원"),
         )
     }
 
