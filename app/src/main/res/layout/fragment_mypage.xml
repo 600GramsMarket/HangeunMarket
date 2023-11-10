@@ -72,12 +72,12 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tv_my_id"
+            android:id="@+id/tv_my_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/cardview_my_profile"
             app:layout_constraintStart_toEndOf="@id/cardview_my_profile"
-            android:text="y2hscmtk"
+            android:text="test@gmail.com"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp"
@@ -88,15 +88,16 @@
             android:id="@+id/tv_my_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_id"
-            app:layout_constraintStart_toStartOf="@id/tv_my_id"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_email"
+            app:layout_constraintStart_toStartOf="@id/tv_my_email"
             android:text="최강"/>
 
 
         <TextView
+            android:id="@+id/tv_my_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IT공과대학 19학번"
+            android:text="IT공과대학"
             app:layout_constraintStart_toStartOf="@id/tv_my_name"
             app:layout_constraintTop_toBottomOf="@id/tv_my_name"/>
 
