@@ -105,30 +105,6 @@ class HomeFragment : Fragment() {
         popupMenu.show()
     }
 
-
-    /*
-    data class SaleItem(
-    var saleItemImage : String, //iv_sale_item 판매 물품 이미지
-    var saleTitle : String, // txt_sale_title 판매 제목
-    val salePlace : String, // txt_sale_place 판매 장소
-    var salePrice : String, // txt_sale_price 판매 가격)
-    * */
-
-    private fun initSaleItemDTOArray(): Array<SaleItem> {
-        return arrayOf(
-            SaleItem(0,"img_for_sale_default","상상부기 인형팝니다~!","상상관","2,000원"),
-            SaleItem(1,"sale_item1","엑셀 2013개정판, CRM 전문가 교재 팝니다.","탐구관","12,000원"),
-            SaleItem(2,"sale_item2","에듀윌 하루 행정학 싸게 올려요~","공학관","4,000원"),
-            SaleItem(3,"sale_item3","안 쓰는 한성대 경영 교재 팔아요~","상상관","5,000원"),
-            SaleItem(4,"sale_item4","나일론 자켓 준지 22ss 팝니다.","탐구관","6,000원"),
-            SaleItem(5,"sale_item5","스타벅스 오늘도 달콤하게(ICE)","탐구관","10,200원"),
-            SaleItem(6,"sale_item6","소니 미러리스 A7R4 바디 팝니당","상상관","2,500,000원"),
-            SaleItem(7,"sale_item7","아이소이 모이스취 닥터 앰플","공학관","10,000원"),
-            SaleItem(8,"sale_item8","슈펜 & 핏더사이즈 콜라보 클로그 260","상상관","40,000원"),
-            SaleItem(9,"sale_item9","삶과 꿈 교재 팝니다!!","공학관","11,000원"),
-        )
-    }
-
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
     private fun setAdapter(){
         recyclerViewSaleItem.layoutManager = LinearLayoutManager(this.context)
