@@ -32,9 +32,6 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
             salePrice = itemView.findViewById(R.id.txt_sale_price)
             salePlace = itemView.findViewById(R.id.txt_sale_place)
 
-//            아이템 클릭에 대한 이벤트 정의
-//            itemView.setOnClickListener {
-//            }
         }
     }
 
@@ -59,10 +56,12 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
     //itemView에 Array<SaleItem>의 값을 할당함
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val saleItem : SaleItem = saleItems[position]
-//        holder.saleItemImage
-        holder.saleTitle.text = saleItem.saleTitle
-        holder.salePlace.text = saleItem.salePlace
-        holder.salePrice.text = saleItem.salePrice
+        holder.apply {
+            saleTitle.text = saleItem.saleTitle
+            salePlace.text = saleItem.salePlace
+            salePrice.text = saleItem.salePrice
+        }
+
         //val imageName = "img_note_$imageNumber"
         val imageName = saleItem.saleItemImage //String
         //이미지의 ResourceId얻어오기(현재는 앱에 넣어둔 이미지를 배경 이미지로 삼음)

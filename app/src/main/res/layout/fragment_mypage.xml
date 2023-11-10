@@ -225,7 +225,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
-            android:text="이용 제한 내역"
+            android:text="선호 상품 내역"
             android:textColor="@color/black"
             android:textSize="16dp"/>
 
@@ -237,7 +237,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
-            android:text="쪽지 설정"
+            android:text="채팅 설정"
             android:textColor="@color/black"
             android:textSize="16dp"/>
 
@@ -249,7 +249,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
-            android:text="커뮤니티 이용 규칙"
+            android:text="이용 규칙"
             android:textColor="@color/black"
             android:textSize="16dp"/>
 
