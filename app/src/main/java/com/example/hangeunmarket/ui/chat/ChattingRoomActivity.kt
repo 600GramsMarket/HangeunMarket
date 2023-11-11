@@ -2,7 +2,11 @@ package com.example.hangeunmarket.ui.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.databinding.ActivityChattingRoomBinding
+import com.example.hangeunmarket.ui.chat.recyclerview.MessageAdapter
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -10,6 +14,9 @@ import com.google.firebase.database.database
 import com.example.hangeunmarket.ui.dto.Message
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 //채팅방
 class ChattingRoomActivity : AppCompatActivity() {
@@ -27,6 +34,14 @@ class ChattingRoomActivity : AppCompatActivity() {
     //chatting room
     private lateinit var receiverRoom: String //받는쪽 대화방
     private lateinit var senderRoom: String //보내는쪽 대화방
+
+    //대화 목록
+    private lateinit var messageList: ArrayList<Message>
+
+    //채팅방 어댑터
+    private lateinit var messageRecyclerView: RecyclerView
+    private lateinit var messageRecyclerViewAdapter : MessageAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,9 +87,39 @@ class ChattingRoomActivity : AppCompatActivity() {
                     database.child("chats").child(receiverRoom).child("messages").push()
                         .setValue(messageObject)
                 }
-
-
+            binding.etMessage.setText("") //초기화
         }
+
+        //대화목록 초기화
+        messageList = ArrayList()
+
+        //채팅목록 리사이클러뷰 초기화
+        messageRecyclerView = binding.recyclerviewChatting
+        messageRecyclerViewAdapter = MessageAdapter(messageList) // 어댑터 생성
+        messageRecyclerView.layoutManager = LinearLayoutManager(this) //레이아웃 설정
+        messageRecyclerView.adapter = messageRecyclerViewAdapter // 어댑터 부착
+
+
+        // 대화 목록 가져오기
+        database.child("chats").child(senderRoom).child("messages")
+            .addValueEventListener(object :ValueEventListener{
+                // 메시지 변경시 호출됨
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    messageList.clear() //empty
+
+                    for(postSnapshat in snapshot.children){
+                        val message = postSnapshat.getValue(Message::class.java)
+                        messageList.add(message!!) //대화 삽입
+                    }
+                    messageRecyclerViewAdapter.notifyDataSetChanged() // 데이터 변경여부 알리기
+                }
+
+                // 오류 발생시
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d("firebae","error : chattingRoom error")
+                }
+            })
+
 
     }
 }

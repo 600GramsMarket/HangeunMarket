@@ -34,7 +34,7 @@ class MessageAdapter(private val messageList: ArrayList<Message>)
     // 받은 쪽
     class ReceiveViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         // 받은 메시지 텍스트뷰 객체 구현
-        val receiveMessage: TextView = itemView.findViewById(R.id.tv_receiver_name)
+        val receiveMessage: TextView = itemView.findViewById(R.id.tv_receive_message)
     }
 
 
