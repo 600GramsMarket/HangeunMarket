@@ -46,14 +46,15 @@ class SignUpFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSignUpBinding.inflate(layoutInflater)
 
-        database = Firebase.database.reference //init database reference
-        auth = Firebase.auth //init authentication
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        database = Firebase.database.reference //init database reference
+        auth = Firebase.auth //init authentication
+
         val btnSingUp = view.findViewById<Button>(R.id.btn_signUp)
         btnSingUp.setOnClickListener {
             val userEmail = binding.etEmail.text.toString() // 사용자 이메일
