@@ -1,6 +1,7 @@
 package com.example.hangeunmarket.ui.chat.recyclerview
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.R
+import com.example.hangeunmarket.ui.chat.ChattingRoomActivity
 
 // 4.아이템을 유지/관리하는 Adapter
 class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
@@ -42,11 +44,6 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
             lastChat = itemView.findViewById(R.id.tv_last_chat)
             cardView = itemView.findViewById(R.id.cardview_chat_user)
 
-            //아이템 클릭에 대한 이벤트 정의
-            //채팅방으로 이동
-            itemView.setOnClickListener {
-
-            }
         }
     }
 
@@ -70,12 +67,22 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
     //(3)
     //itemView에 Array<ChattingRoomItem>의 값을 할당함
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val chattingRoomItem : ChattingRoomItem = chattingRoomItems[position]
+        val currentUser : ChattingRoomItem = chattingRoomItems[position]
 //        holder.chatItemImage
-        holder.chatUserName.text = chattingRoomItem.chatUserName
-        holder.lastChat.text = chattingRoomItem.lastChat
+        holder.chatUserName.text = currentUser.chatUserName
+        holder.lastChat.text = currentUser.lastChat
 
-        holder.cardView.setCardBackgroundColor(predefinedColors[chattingRoomItem.chatItemImage])
+        holder.cardView.setCardBackgroundColor(predefinedColors[currentUser.chatItemImage])
+
+        // 아이템 클릭시 이벤트
+        // 채팅방으로 이동하는 부분
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ChattingRoomActivity::class.java)
+            // 상대방의 UID와 이름을 intent에 담아서 이동
+            intent.putExtra("name",currentUser.chatUserName) //name
+            intent.putExtra("uId",currentUser.userId) //uId
+            context.startActivity(intent) // 채팅방으로 이동
+        }
     }
 
 
