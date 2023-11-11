@@ -1,6 +1,7 @@
 package com.example.hangeunmarket.ui.chat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.databinding.FragmentChatBinding
 import com.example.hangeunmarket.ui.chat.recyclerview.ChattingRoomItem
 import com.example.hangeunmarket.ui.chat.recyclerview.ChattingRoomItemRecyclerViewAdapter
+import com.example.hangeunmarket.ui.dto.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import kotlin.random.Random
+
 
 class ChatFragment : Fragment() {
 
@@ -21,12 +33,19 @@ class ChatFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-
     //recycler view layout
     private lateinit var recyclerViewChattingItem : RecyclerView
 
     //recycler view adapter
     private lateinit var recyclerViewChattingItemAdapter : ChattingRoomItemRecyclerViewAdapter
+
+    //Firebase database reference
+    private lateinit var database: DatabaseReference
+    //Firebase Authentication
+    private lateinit var auth: FirebaseAuth
+
+    //Firebase Event Listener
+    private lateinit var childEventListener: ChildEventListener
 
     //HomeFragment ViewModel
     private val chatViewModel by lazy {
@@ -40,13 +59,15 @@ class ChatFragment : Fragment() {
     ): View {
         _binding = FragmentChatBinding.inflate(inflater, container, false)
 
+        //Firebase init
+        database = Firebase.database.reference
+        auth = Firebase.auth
 
         recyclerViewChattingItem = binding.recyclerviewChattingRoom
 
-        // 더미데이터를 ViewModel의 LiveData에 설정
-        chatViewModel.chattingRoomItemsLiveData.value = initChattingRoomItemDTOArray().toList()
+        addChildFirebaseListener() //리스너 부착
 
-        // LiveData를 관찰하여 어댑터 데이터 업데이트
+        // LiveData Observer 설정
         chatViewModel.chattingRoomItemsLiveData.observe(viewLifecycleOwner, Observer { items ->
             recyclerViewChattingItemAdapter.setChattingRoomItem(items)
         })
@@ -56,27 +77,47 @@ class ChatFragment : Fragment() {
         return binding.root
     }
 
+    private fun addChildFirebaseListener() {
+        childEventListener = object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                Log.d("firebase","call onChildAdded")
+                val newUser = snapshot.getValue(User::class.java)
+                newUser?.let { user ->
+                    if (auth.currentUser?.uid != user.uId) {
+                        val randInt = Random.nextInt(0, 4)
 
-    /*
-    * data class ChattingRoomItem(
-    var chatItemImage : String, //채팅 방 이미지
-    var chatUserName : String, //상대방 이름
-    val lastChat : String, //마지막 채팅
-    * */
+                        // 리스트에 동일한 사용자가 있는지 확인
+                        val isAlreadyAdded = chatViewModel.chattingRoomItemsLiveData.value?.any { it.userId == user.uId } == true
+                        if (!isAlreadyAdded) {
+                            val newChatRoomItem = ChattingRoomItem(randInt, user.name, user.email, user.uId) // userId 추가
+                            val updatedList = chatViewModel.chattingRoomItemsLiveData.value.orEmpty().toMutableList()
+                            updatedList.add(newChatRoomItem)
+                            chatViewModel.chattingRoomItemsLiveData.value = updatedList
+                        }
+                    }
+                }
+            }
 
-    private fun initChattingRoomItemDTOArray(): Array<ChattingRoomItem> {
-        return arrayOf(
-            ChattingRoomItem(1,"User1","좋은 물건 감사합니다~!"),
-            ChattingRoomItem(2,"User2","넵 상상관에서 뵐게요!"),
-            ChattingRoomItem(0,"User3","네고 가능할까요??"),
-            ChattingRoomItem(1,"User4","넵 알겠습니다!"),
-            ChattingRoomItem(3,"User5","네네"),
-            ChattingRoomItem(2,"User6","곧 있으면 도착해요!"),
-            ChattingRoomItem(0,"User7","넵"),
-            ChattingRoomItem(3,"User8","네ㅎㅎ 감사합니다"),
-            ChattingRoomItem(1,"User9","네 다음주에 봬요!"),
-        )
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                // 데이터 변경시 처리 로직
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                // 데이터 삭제시 처리 로직
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        }
+
+        database.child("user").addChildEventListener(childEventListener)
     }
+
+
 
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
     private fun setAdapter(){
@@ -89,5 +130,11 @@ class ChatFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //리스너 삭제
+        database.child("user").removeEventListener(childEventListener)
     }
 }
