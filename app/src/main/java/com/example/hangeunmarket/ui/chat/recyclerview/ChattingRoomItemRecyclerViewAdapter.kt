@@ -42,9 +42,11 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
             lastChat = itemView.findViewById(R.id.tv_last_chat)
             cardView = itemView.findViewById(R.id.cardview_chat_user)
 
-//            아이템 클릭에 대한 이벤트 정의
-//            itemView.setOnClickListener {
-//            }
+            //아이템 클릭에 대한 이벤트 정의
+            //채팅방으로 이동
+            itemView.setOnClickListener {
+
+            }
         }
     }
 
