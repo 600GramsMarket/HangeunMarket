@@ -56,7 +56,8 @@
         android:layout_alignParentTop="true"
         android:layout_above="@id/linearLayout_input"
         app:layout_constraintTop_toBottomOf="@id/constraint_tool_bar"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout_input"/>
+        app:layout_constraintBottom_toTopOf="@id/linearLayout_input"
+        tools:listitem="@layout/item_send_message"/>
 
 
     <!--채팅 보내기-->
