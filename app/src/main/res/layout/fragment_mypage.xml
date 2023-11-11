@@ -129,39 +129,39 @@
             android:textSize="22dp"/>
 
         <TextView
-            android:id="@+id/tv_change_password"
+            android:id="@+id/tv_change_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_verify_school"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
             android:layout_marginStart="15dp"
-            android:text="학교 인증"
+            android:text="소속 변경"
             android:textColor="@color/black"
             android:textSize="16dp"/>
 
 
         <TextView
-            android:id="@+id/tv_change_email"
+            android:id="@+id/tv_change_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_change_password"
+            app:layout_constraintTop_toBottomOf="@id/tv_change_school"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="15dp"
+            android:text="이름 변경"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_change_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_change_name"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="14dp"
             android:layout_marginStart="15dp"
             android:text="비밀번호 변경"
-            android:textColor="@color/black"
-            android:textSize="16dp"/>
-
-        <TextView
-            android:id="@+id/tv_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_change_email"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="15dp"
-            android:text="이메일 변경"
             android:textColor="@color/black"
             android:textSize="16dp"/>
 
