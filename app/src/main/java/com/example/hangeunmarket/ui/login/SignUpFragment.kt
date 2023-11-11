@@ -1,5 +1,6 @@
 package com.example.hangeunmarket.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -82,6 +83,9 @@ class SignUpFragment : Fragment() {
                     val uId = auth.currentUser?.uid!! //현재 사용자의 uid
                     addUser(userEmail, name, school, uId) //데이터베이스에 사용자 추가
 
+                    //sharedPreference에 사용자 정보 저장
+                    saveUserInFoToSharedPreference(userEmail, name, school)
+
                     activity?.finish() // 현재 액티비티 종료
                 } else {
                     // 회원가입 실패
@@ -99,6 +103,18 @@ class SignUpFragment : Fragment() {
 
     }
 
+    //SharedPreference에 사용자 정보 저장
+    private fun saveUserInFoToSharedPreference(userEmail: String, name:String, school:String){
+        val sharedPref = activity?.getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
+        //editor를 사용하여 사용자 정보 저장
+        val editor = sharedPref?.edit()
+        editor?.apply {
+            putString("userName",name)
+            putString("userEmail",userEmail)
+            putString("userSchool",school)
+            apply() //저장
+        }
+    }
 
 
 }

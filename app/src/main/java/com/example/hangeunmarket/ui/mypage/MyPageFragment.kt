@@ -1,5 +1,6 @@
 package com.example.hangeunmarket.ui.mypage
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -49,9 +50,12 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //현재 사용자의 정보 업데이트
-        setUserInfo()
+        getUserInfo() //sharedPreference에서 정보 얻어오기
+        //setUserInfo()
     }
 
+
+    //firebase에서 직접 데이터 얻어와서 반영 => 서버 딜레이로 폐기
     private fun setUserInfo(){
         val uid = auth.currentUser?.uid!!
         //데이터 한번 읽기
@@ -71,6 +75,18 @@ class MyPageFragment : Fragment() {
         }.addOnFailureListener {
             // 실패 시
             Log.e("firebase", "Error getting data", it)
+        }
+
+    }
+
+
+    //sharedPreference로부터 사용자 정보 얻어오기
+    private fun getUserInfo(){
+        val sharedPref = activity?.getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
+        sharedPref?.apply {
+            binding.tvMyEmail.text = getString("userEmail","이메일 정보 없음")
+            binding.tvMyName.text = getString("userName","이름 정보 없음")
+            binding.tvMySchool.text = getString("userSchool","학교 정보 없음")
         }
 
     }

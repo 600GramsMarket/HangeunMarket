@@ -11,6 +11,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // LoginStartFragment를 첫번째 프래그먼트로 설정
+        // 이미 로그인한 기록이 있다면 sharedPreference를 사용하여 자동 로그인 수행하는것 고려해보기
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragment_container, LoginStartFragment()) //container는 FrameLayout의 id
             commit()
