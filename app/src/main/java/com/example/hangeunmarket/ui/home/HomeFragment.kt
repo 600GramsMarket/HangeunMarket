@@ -49,8 +49,6 @@ class HomeFragment : Fragment() {
     private lateinit var database: DatabaseReference
     //Firebase Authentication
     private lateinit var auth: FirebaseAuth
-    //Firebase Event Listener
-    private lateinit var childEventListener: ChildEventListener
 
     //HomeFragment ViewModel
     private lateinit var homeViewModel: HomeViewModel
