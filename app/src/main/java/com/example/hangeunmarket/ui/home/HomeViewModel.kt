@@ -1,22 +1,45 @@
-package com.example.hangeunmarket.ui.home
-
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.hangeunmarket.ui.chat.recyclerview.ChattingRoomItem
 import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class HomeViewModel : ViewModel() {
-    val saleItemsLiveData: MutableLiveData<List<SaleItem>?> = MutableLiveData()
+    private val dbRef = FirebaseDatabase.getInstance().getReference("sales")
+    private val _saleItems = MutableLiveData<List<SaleItem>>()
+    val saleItemsLiveData: LiveData<List<SaleItem>> = _saleItems
 
-    //원하는 조건에 맞춰 라이브데이터 업데이트
-    //선택한 장소에 맞춰서 리사이클러뷰의 라이브 데이터 변경하는 코드
-    fun changeSaleItemForSelectedPlace(place: String) {
-        // 테스트 용으로 상상관으로 설정
-        val filteredList = saleItemsLiveData.value?.filter { it.salePlace == place }
-        saleItemsLiveData.value = filteredList
+    // 전체 데이터를 저장하는 리스트
+    private var allSaleItems = listOf<SaleItem>()
+
+    init {
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val items = mutableListOf<SaleItem>()
+                for (postSnapshot in snapshot.children) {
+                    val item = postSnapshot.getValue(SaleItem::class.java)
+                    item?.let { items.add(it) }
+                }
+                allSaleItems = items
+                _saleItems.value = items // 전체 데이터로 초기화
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
     }
 
-
+    // 필터링 메소드
+    fun changeSaleItemForSelectedPlace(place: String) {
+        val filteredItems = if (place == "전체") {
+            allSaleItems // 전체 데이터 반환
+        } else {
+            allSaleItems.filter { it.salePlace == place } // 필터링된 데이터 반환
+        }
+        _saleItems.value = filteredItems
+    }
 }

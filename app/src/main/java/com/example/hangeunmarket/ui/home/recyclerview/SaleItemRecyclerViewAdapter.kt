@@ -56,15 +56,6 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
         val saleItem : SaleItem = saleItems[position]
 
         // 판매상품 이미지 Storage에서 가져와서 보여주기
-//        val imagePath = "gs://hangeunmarket.appspot.com/"
-//        val imageName = saleItem.saleItemImage //String
-//        val imageRef = Firebase.storage.getReferenceFromUrl("${imagePath}${imageName}")
-//        displayImageRef(imageRef,holder.saleItemImage)
-
-//        val imagePath = "gs://hangeunmarket.appspot.com/${saleItem.saleItemImage}"
-//        Glide.with(context)
-//            .load(imagePath)
-//            .into(holder.saleItemImage)
 
         // Firebase Storage에서 이미지 참조 가져오기
         val storageReference = Firebase.storage.reference.child(saleItem.saleItemImage)

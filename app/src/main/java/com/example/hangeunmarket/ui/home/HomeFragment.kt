@@ -1,5 +1,6 @@
 package com.example.hangeunmarket.ui.home
 
+import HomeViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -52,9 +53,7 @@ class HomeFragment : Fragment() {
     private lateinit var childEventListener: ChildEventListener
 
     //HomeFragment ViewModel
-    private val homeViewModel by lazy {
-        ViewModelProvider(this)[HomeViewModel::class.java]
-    }
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,6 +68,8 @@ class HomeFragment : Fragment() {
         database = Firebase.database.reference
         auth = Firebase.auth
 
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
         // LiveData를 관찰하여 어댑터 데이터 업데이트
         homeViewModel.saleItemsLiveData.observe(viewLifecycleOwner, Observer { items ->
             if (items != null) {
@@ -78,7 +79,6 @@ class HomeFragment : Fragment() {
 
         setAdapter() //어댑터 붙이기
 
-        addChildFirebaseListener()
         binding.btnSalesWriting.setOnClickListener {
             var intent = Intent(this@HomeFragment.activity,SaleWritingActivity::class.java)
             startActivity(intent) //SaleActivity로 엑티비티 전환
@@ -91,38 +91,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun addChildFirebaseListener() {
-        childEventListener = object : ChildEventListener {
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                Log.d("firebase","SaleItem added")
-                val newSaleItem = snapshot.getValue(SaleItem::class.java)
-                newSaleItem?.let { saleItem ->
-                    // RecyclerView에 표시할 데이터 리스트에 SaleItem 추가
-                    val updatedList = homeViewModel.saleItemsLiveData.value.orEmpty().toMutableList()
-                    updatedList.add(saleItem)
-                    homeViewModel.saleItemsLiveData.value = updatedList
-                }
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                // SaleItem 데이터가 변경되었을 때의 처리 로직
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                // SaleItem이 삭제되었을 때의 처리 로직
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                // 필요한 경우 처리 로직을 추가합니다.
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // 데이터 읽기가 취소되었을 때의 처리 로직
-            }
-        }
-
-        database.child("sales").addChildEventListener(childEventListener)
-    }
 
 
 
@@ -137,19 +105,17 @@ class HomeFragment : Fragment() {
             when (item.itemId) {
                 R.id.menu_item_all -> {
                     // "전체" 클릭시
+                    homeViewModel.changeSaleItemForSelectedPlace("전체")
                     true
                 }
                 R.id.menu_item_sangsang -> {
                     // "상상관" 클릭시
-                    // 데이터모델에서 모델 데이터를 변경하도록 설정
-                    homeViewModel.changeSaleItemForSelectedPlace("상상관") //상상관
-
+                    homeViewModel.changeSaleItemForSelectedPlace("상상관")
                     true
                 }
                 R.id.menu_item_gonghak -> {
                     // "공학관" 클릭시
-
-                    homeViewModel.changeSaleItemForSelectedPlace("공학관") //공학관
+                    homeViewModel.changeSaleItemForSelectedPlace("공학관")
                     true
                 }
                 R.id.menu_item_taemgu -> {
@@ -174,7 +140,6 @@ class HomeFragment : Fragment() {
         recyclerViewSaleItemAdapter = activity?.let { SaleItemRecyclerViewAdapter(it) }!!
         recyclerViewSaleItem.adapter = recyclerViewSaleItemAdapter
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
