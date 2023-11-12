@@ -66,27 +66,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="7dp"
         android:orientation="horizontal"
         android:weightSum="100">
 
         <EditText
             android:id="@+id/et_message"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_weight="80"
             android:background="@drawable/shape_edit"
-            android:layout_marginTop="7dp"
+            android:layout_marginVertical="7dp"
             android:hint="메시지를 입력하세요"
             android:paddingStart="10dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_send_message"
-            android:layout_width="30dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginVertical="7dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="20"
