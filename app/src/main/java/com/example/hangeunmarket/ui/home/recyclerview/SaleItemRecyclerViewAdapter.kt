@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hangeunmarket.R
-import com.example.hangeunmarket.ui.home.HomeFragment
 
 // 4.아이템을 유지/관리하는 Adapter
 class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함

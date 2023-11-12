@@ -1,6 +1,7 @@
 package com.example.hangeunmarket.ui.login
 
 import android.graphics.Typeface
+import android.media.Image
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -10,8 +11,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
 
 // 앱의 초기화면에 해당
@@ -42,6 +45,11 @@ class LoginStartFragment : Fragment() {
                 commit()
             }
         }
+
+
+        //Glide teset
+//        val imageView = view.findViewById<ImageView>(R.id.iv_meat_logo)
+//        Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
 
 
         // <이미 계정이 있나요? 로그인> 로직
