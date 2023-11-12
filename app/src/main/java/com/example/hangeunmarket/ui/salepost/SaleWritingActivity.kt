@@ -30,16 +30,17 @@ class SaleWritingActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_sale_writing)
 
-        saleTitle = findViewById<EditText>(R.id.et_set_title) //판매 글 제목
-        salePrice = findViewById<EditText>(R.id.et_set_price) //판매 가격
-        saleItemInfo = findViewById<EditText>(R.id.et_set_explain) //상품 설명
-        salePlace = findViewById<EditText>(R.id.et_set_place) //판매 희망 장소
+        saleTitle = findViewById(R.id.et_set_title) //판매 글 제목
+        salePrice = findViewById(R.id.et_set_price) //판매 가격
+        saleItemInfo = findViewById(R.id.et_set_explain) //상품 설명
+        salePlace = findViewById(R.id.et_set_place) //판매 희망 장소
 
 
         var btnWriteDone = findViewById<Button>(R.id.btn_write_done)
         //글 쓰기 완료시
         btnWriteDone.setOnClickListener{
             val intent = Intent(this@SaleWritingActivity,SalePostActivity::class.java)
+
 
             //intent에 데이터 삽입 => 판매글 엑티비티로 넘기기
             intent.putExtra("saleTitle",saleTitle.text.toString())
