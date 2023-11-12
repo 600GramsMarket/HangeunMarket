@@ -72,16 +72,16 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
         holder.apply {
             saleTitle.text = saleItem.saleTitle
             salePlace.text = saleItem.salePlace
-            salePrice.text = saleItem.salePrice
+            salePrice.text = saleItem.salePrice.toString()
         }
 
-        //아이템 클릭 이벤트 작성
+        //아이템 클릭 이벤트 작성r
         holder.itemView.setOnClickListener {
             val intent = Intent(context,SalePostActivity::class.java)
 
             //intent에 데이터 삽입 => 판매글 엑티비티로 넘기기
             intent.putExtra("saleTitle",saleItem.saleTitle) //제목
-            intent.putExtra("salePrice",saleItem.salePrice) //가격
+            intent.putExtra("salePrice",saleItem.salePrice.toString()) //가격
             intent.putExtra("saleItemInfo",saleItem.saleContent) //물건 정보
             intent.putExtra("salePlace",saleItem.salePlace) //판매장소
             intent.putExtra("sellerUId",saleItem.sellerUID) //판매자 UID

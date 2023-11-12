@@ -23,8 +23,8 @@ class HomeViewModel : ViewModel() {
                     val item = postSnapshot.getValue(SaleItem::class.java)
                     item?.let { items.add(it) }
                 }
-                allSaleItems = items
-                _saleItems.value = items // 전체 데이터로 초기화
+                allSaleItems = items.asReversed()
+                _saleItems.value = allSaleItems // 전체 데이터로 초기화
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -40,6 +40,6 @@ class HomeViewModel : ViewModel() {
         } else {
             allSaleItems.filter { it.salePlace == place } // 필터링된 데이터 반환
         }
-        _saleItems.value = filteredItems
+        _saleItems.value = filteredItems.asReversed()
     }
 }

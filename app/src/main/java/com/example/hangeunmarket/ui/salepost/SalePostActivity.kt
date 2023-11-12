@@ -8,8 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
 import com.example.hangeunmarket.ui.chat.ChattingRoomActivity
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 
 
 //판매 글 보기와 관련된 로직 처리
@@ -47,7 +50,7 @@ class SalePostActivity : AppCompatActivity() {
             intent.putExtra("sellerName",saleItem.sellerName) //판매자 이름
             intent.putExtra("saleItemImage",saleItem.saleItemImage) //이미지url
         * */
-
+        Log.d("ImageTest","엑티비티 이동")
 
         var saleTitle = intent.getStringExtra("saleTitle") // 제목
         var salePrice = intent.getStringExtra("salePrice") // 가격
@@ -56,6 +59,7 @@ class SalePostActivity : AppCompatActivity() {
         var sellerName = intent.getStringExtra("sellerName") // 판매자 이름
         var sellerUId = intent.getStringExtra("sellerUId") // 판매자 UID
         var saleItemImageName = intent.getStringExtra("saleItemImage") //판매 상품 이미지 이름
+        Log.d("ImageTest","이미지 추출 ${saleItemImageName}")
 
 
         Log.d("get data : ","${saleTitle},${salePrice},${saleItemInfo},${salePlace}")
@@ -66,6 +70,23 @@ class SalePostActivity : AppCompatActivity() {
         tvSaleItemInfo.text = saleItemInfo
         tvSalePrice.text = salePrice
         tvSellerName.text = sellerName
+
+        // 이미지가 존재할 경우에만 이미지 불러오기
+        if (saleItemImageName != null){
+            // Firebase Storage에서 이미지 참조 가져오기
+            val storageReference = Firebase.storage.reference.child(saleItemImageName)
+
+            // 다운로드 URL을 가져와 Glide로 로드하기
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(this)
+                    .load(uri.toString())
+                    .into(ivSaleItemImage)
+            }.addOnFailureListener {
+                // 에러 처리
+            }
+        }
+
+
 
 
         //채팅 버튼 클릭시
