@@ -4,10 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
 import com.example.hangeunmarket.ui.chat.ChattingRoomActivity
@@ -87,6 +91,13 @@ class SalePostActivity : AppCompatActivity() {
         }
 
 
+        //
+        val popup = findViewById<ImageView>(R.id.iv_item_setting)
+        popup.setOnClickListener {
+            showPopupMenu(it) //it == popup
+        }
+
+
 
 
         //채팅 버튼 클릭시
@@ -104,6 +115,32 @@ class SalePostActivity : AppCompatActivity() {
             startActivity(intent) //엑티비티 이동
         }
 
+        //뒤로 가기
+        val btnBack = findViewById<ImageView>(R.id.iv_back)
+        btnBack.setOnClickListener {
+            finish()
+        }
 
+
+    }
+
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(this, view)
+        val inflater: MenuInflater = popupMenu.menuInflater
+        //어떤 메뉴를 띄워줄지
+        inflater.inflate(R.menu.menu_popup, popupMenu.menu)
+
+        //메뉴 클릭시 동작 정의
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_item_all -> {
+                    // 수정 클릭시
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
 }

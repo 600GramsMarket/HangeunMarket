@@ -36,7 +36,7 @@ class HomeViewModel : ViewModel() {
     // 필터링 메소드
     fun changeSaleItemForSelectedPlace(place: String) {
         val filteredItems = if (place == "전체") {
-            allSaleItems // 전체 데이터 반환
+            allSaleItems.asReversed() // 전체 데이터 반환
         } else {
             allSaleItems.filter { it.salePlace == place } // 필터링된 데이터 반환
         }

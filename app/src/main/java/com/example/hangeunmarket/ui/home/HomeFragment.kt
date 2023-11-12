@@ -9,6 +9,7 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -53,6 +54,8 @@ class HomeFragment : Fragment() {
     //HomeFragment ViewModel
     private lateinit var homeViewModel: HomeViewModel
 
+    private lateinit var tvPlace: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,6 +64,8 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         recyclerViewSaleItem = binding.recyclerviewSaleItem
+
+        tvPlace = binding.tvPlace
 
         //Firebase init
         database = Firebase.database.reference
@@ -104,26 +109,31 @@ class HomeFragment : Fragment() {
                 R.id.menu_item_all -> {
                     // "전체" 클릭시
                     homeViewModel.changeSaleItemForSelectedPlace("전체")
+                    tvPlace.text = "전체"
                     true
                 }
                 R.id.menu_item_sangsang -> {
                     // "상상관" 클릭시
                     homeViewModel.changeSaleItemForSelectedPlace("상상관")
+                    tvPlace.text = "상상관"
                     true
                 }
                 R.id.menu_item_gonghak -> {
                     // "공학관" 클릭시
                     homeViewModel.changeSaleItemForSelectedPlace("공학관")
+                    tvPlace.text = "공학관"
                     true
                 }
                 R.id.menu_item_taemgu -> {
                     // "탐구관" 클릭시
                     homeViewModel.changeSaleItemForSelectedPlace("탐구관") //탐구관
+                    tvPlace.text = "탐구관"
                     true
                 }
                 R.id.menu_item_insung -> {
                     // "인성관" 클릭시
                     homeViewModel.changeSaleItemForSelectedPlace("인성관") //인성관
+                    tvPlace.text = "인성관"
                     true
                 }
                 else -> false

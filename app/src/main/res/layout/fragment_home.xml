@@ -24,7 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp"
-            android:text="상상관"
+            android:text="전체"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:textStyle="bold" />
