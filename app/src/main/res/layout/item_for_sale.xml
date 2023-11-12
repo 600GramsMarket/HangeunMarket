@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/img_for_sale_default" />
+                app:srcCompat="@drawable/img_butcher2" />
 
         </androidx.cardview.widget.CardView>
 

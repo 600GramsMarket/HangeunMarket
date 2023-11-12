@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
 import com.example.hangeunmarket.ui.salepost.SalePostActivity
 import com.google.firebase.Firebase
@@ -55,10 +56,27 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
         val saleItem : SaleItem = saleItems[position]
 
         // 판매상품 이미지 Storage에서 가져와서 보여주기
-        val imagePath = "gs://hangeunmarket.appspot.com/"
-        val imageName = saleItem.saleItemImage //String
-        val imageRef = Firebase.storage.getReferenceFromUrl("${imagePath}${imageName}")
-        displayImageRef(imageRef,holder.saleItemImage)
+//        val imagePath = "gs://hangeunmarket.appspot.com/"
+//        val imageName = saleItem.saleItemImage //String
+//        val imageRef = Firebase.storage.getReferenceFromUrl("${imagePath}${imageName}")
+//        displayImageRef(imageRef,holder.saleItemImage)
+
+//        val imagePath = "gs://hangeunmarket.appspot.com/${saleItem.saleItemImage}"
+//        Glide.with(context)
+//            .load(imagePath)
+//            .into(holder.saleItemImage)
+
+        // Firebase Storage에서 이미지 참조 가져오기
+        val storageReference = Firebase.storage.reference.child(saleItem.saleItemImage)
+
+        // 다운로드 URL을 가져와 Glide로 로드하기
+        storageReference.downloadUrl.addOnSuccessListener { uri ->
+            Glide.with(context)
+                .load(uri.toString())
+                .into(holder.saleItemImage)
+        }.addOnFailureListener {
+            // 에러 처리
+        }
 
         holder.apply {
             saleTitle.text = saleItem.saleTitle
