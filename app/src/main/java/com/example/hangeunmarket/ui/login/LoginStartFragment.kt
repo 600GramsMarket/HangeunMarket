@@ -1,5 +1,6 @@
 package com.example.hangeunmarket.ui.login
 
+import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.media.Image
 import android.os.Bundle
@@ -16,6 +17,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
+import com.google.firebase.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.storage
 
 // 앱의 초기화면에 해당
 class LoginStartFragment : Fragment() {
@@ -47,10 +51,18 @@ class LoginStartFragment : Fragment() {
         }
 
 
-        //Glide teset
+        //Glide test
 //        val imageView = view.findViewById<ImageView>(R.id.iv_meat_logo)
 //        Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
 
+
+        //Fireabse Storage test
+//        val imageView = view.findViewById<ImageView>(R.id.iv_meat_logo)
+//        // 이미지 참조 가져오기
+//        val imageRef = Firebase.storage.getReferenceFromUrl(
+//            "gs://hangeunmarket.appspot.com/bugi.png"
+//        )
+//        displayImageRef(imageRef,imageView)
 
         // <이미 계정이 있나요? 로그인> 로직
         // 'text_button_sign_in' 클릭 시 SignInFragment로 교체
@@ -64,6 +76,16 @@ class LoginStartFragment : Fragment() {
             }
         }
 
+    }
+
+    // 스토리지에서 이미지 가져와서 표시하기
+    private fun displayImageRef(imageRef:StorageReference?,view:ImageView){
+        imageRef?.getBytes(Long.MAX_VALUE)?.addOnSuccessListener {
+            val bmp = BitmapFactory.decodeByteArray(it,0,it.size)
+            view.setImageBitmap(bmp) // bitmap으로 이미지뷰에 이미지 설정
+        }?.addOnFailureListener {
+            //Failed to download the image
+        }
     }
 
 

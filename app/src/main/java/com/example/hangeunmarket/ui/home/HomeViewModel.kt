@@ -7,6 +7,21 @@ import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
 class HomeViewModel : ViewModel() {
     val saleItemsLiveData: MutableLiveData<List<SaleItem>?> = MutableLiveData()
 
+    init{
+
+        saleItemsLiveData.value = listOf(
+            SaleItem("bugi.png",
+                "상상부기 팝니다",
+                "상상관",
+                "2,000원",
+                "oJOaFwoBDDQj1XC2f1BhGnc9D5l2",
+                false,
+                "최강",
+                "상상부기 2000원에 팝니다")
+        )
+    }
+
+
 //    init {
 //        // 테스트용 초기 더미 데이터 설정
 //        saleItemsLiveData.value = listOf(
