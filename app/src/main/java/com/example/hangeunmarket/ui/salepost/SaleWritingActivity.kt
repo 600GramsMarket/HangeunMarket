@@ -80,9 +80,9 @@ class SaleWritingActivity : AppCompatActivity() {
             val itemInfo = saleItemInfo.text.toString()
             val place = salePlace.text.toString()
 
-            if (title.isEmpty() || priceText.isEmpty() || itemInfo.isEmpty() || place.isEmpty() || isImageUpload) {
+            if (title.isEmpty() || priceText.isEmpty() || itemInfo.isEmpty() || place.isEmpty() || !isImageUpload) {
 
-                if(isImageUpload){
+                if(!isImageUpload){
                     Toast.makeText(this,"이미지를 업로드해주세요.",Toast.LENGTH_SHORT).show()
                 } else if(title.isEmpty()) {
                     Toast.makeText(this, "제목을 작성해주세요", Toast.LENGTH_SHORT).show()

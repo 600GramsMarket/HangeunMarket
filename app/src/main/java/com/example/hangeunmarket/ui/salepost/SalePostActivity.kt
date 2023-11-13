@@ -27,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.storage
+import java.text.NumberFormat
+import java.util.Locale
 
 
 //판매 글 보기와 관련된 로직 처리
@@ -100,7 +102,7 @@ class SalePostActivity : AppCompatActivity() {
         tvSaleTitle.text = saleTitle
         tvSalePlace.text = "판매장소 : ${salePlace}"
         tvSaleItemInfo.text = saleItemInfo
-        tvSalePrice.text = salePrice.toString()
+        tvSalePrice.text = formatPrice(salePrice.toString().toInt())
         tvSellerName.text = sellerName
 
         dbRef = FirebaseDatabase.getInstance().getReference("user")
@@ -217,6 +219,12 @@ class SalePostActivity : AppCompatActivity() {
 
     }
 
+    // 가격 형식화 함수
+    private fun formatPrice(price: Int): String {
+        val numberFormat = NumberFormat.getNumberInstance(Locale.KOREA)
+        return numberFormat.format(price) + "원"
+    }
+
 
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
@@ -240,6 +248,13 @@ class SalePostActivity : AppCompatActivity() {
                     intent.putExtra("saleItemId",saleItemId) //판매 아이템 아이디 넘겨주기
                     startActivity(intent)
                     finish()
+                    true
+                }
+                R.id.menu_remove -> {
+                    dbRef = FirebaseDatabase.getInstance().getReference("sales")
+                    dbRef.child(saleItemId).removeValue() //데이터 삭제
+                    finish() //현재 엑티비티 종료
+                    Toast.makeText(this, "게시글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     true
                 }
                 R.id.menu_declaration -> {

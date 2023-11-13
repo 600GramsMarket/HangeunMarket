@@ -14,6 +14,8 @@ import com.example.hangeunmarket.R
 import com.example.hangeunmarket.ui.salepost.SalePostActivity
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
+import java.text.NumberFormat
+import java.util.Locale
 
 // 4.아이템을 유지/관리하는 Adapter
 class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
@@ -92,7 +94,7 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
             viewHolder.apply {
                 saleTitle.text = saleItem.saleTitle
                 salePlace.text = saleItem.salePlace
-                salePrice.text = saleItem.salePrice.toString()
+                salePrice.text = formatPrice(saleItem.salePrice)
             }
             // 다운로드 URL을 가져와 Glide로 로드하기
             storageReference.downloadUrl.addOnSuccessListener { uri ->
@@ -108,7 +110,7 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
             viewHolder.apply {
                 saleTitle.text = saleItem.saleTitle
                 salePlace.text = saleItem.salePlace
-                salePrice.text = saleItem.salePrice.toString()
+                salePrice.text = formatPrice(saleItem.salePrice)
             }
             // 다운로드 URL을 가져와 Glide로 로드하기
             // 이미지가 존재할 경우에만
@@ -151,4 +153,12 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
     override fun getItemCount(): Int {
         return saleItems.size
     }
+
+
+    // 가격 형식화 함수
+    private fun formatPrice(price: Int): String {
+        val numberFormat = NumberFormat.getNumberInstance(Locale.KOREA)
+        return numberFormat.format(price) + "원"
+    }
+
 }
