@@ -2,7 +2,6 @@ package com.example.hangeunmarket.ui.home.recyclerview
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
-import com.example.hangeunmarket.ui.chat.recyclerview.MessageAdapter
 import com.example.hangeunmarket.ui.salepost.SalePostActivity
 import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.storage
 
 // 4.아이템을 유지/관리하는 Adapter
@@ -115,12 +111,15 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
                 salePrice.text = saleItem.salePrice.toString()
             }
             // 다운로드 URL을 가져와 Glide로 로드하기
-            storageReference.downloadUrl.addOnSuccessListener { uri ->
-                Glide.with(context)
-                    .load(uri.toString())
-                    .into(holder.saleItemImage)
-            }.addOnFailureListener {
-                // 에러 처리
+            // 이미지가 존재할 경우에만
+            if(holder.saleItemImage != null){
+                storageReference.downloadUrl.addOnSuccessListener { uri ->
+                    Glide.with(context)
+                        .load(uri.toString())
+                        .into(holder.saleItemImage)
+                }.addOnFailureListener {
+                    // 에러 처리
+                }
             }
         }
 
@@ -145,17 +144,6 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
 
     }
 
-
-
-    // 스토리지에서 이미지 가져와서 표시하기
-    private fun displayImageRef(imageRef: StorageReference?, view:ImageView){
-        imageRef?.getBytes(Long.MAX_VALUE)?.addOnSuccessListener {
-            val bmp = BitmapFactory.decodeByteArray(it,0,it.size)
-            view.setImageBitmap(bmp) // bitmap으로 이미지뷰에 이미지 설정
-        }?.addOnFailureListener {
-            //Failed to download the image
-        }
-    }
 
 
     //리사이클러뷰의 아이템의 개수가 총 몇개인지를 리턴
