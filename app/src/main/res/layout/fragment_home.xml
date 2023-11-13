@@ -24,7 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp"
-            android:text="전체"
+            android:text="한성대"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -58,22 +58,30 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--검색창에 해당(가격 조건 설정,판매중 판매완료 선택)-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_item_search"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:id="@+id/constraint_search"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         app:layout_constraintTop_toBottomOf="@id/constraint_tool_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="100dp"
+        android:background="@color/white_200"
+        android:visibility="invisible"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/framelayout_search_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp"
+            android:text="가격"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
 
-        </FrameLayout>
 
 
         <View
@@ -83,11 +91,14 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_saleItem"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_item_search"
+        app:layout_constraintTop_toBottomOf="@id/constraint_tool_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

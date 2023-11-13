@@ -42,4 +42,13 @@ class HomeViewModel : ViewModel() {
         }
         _saleItems.value = filteredItems.asReversed()
     }
+
+    fun filterData(minPrice: Int, maxPrice: Int, isSale: Boolean) {
+        val filteredItems = allSaleItems.filter { item ->
+            // 판매 상태와 가격 범위에 맞는 항목 필터링
+            (item.sale == isSale) && (item.salePrice in minPrice..maxPrice)
+        }
+        _saleItems.value = filteredItems // 필터링된 데이터로 업데이트
+    }
+
 }

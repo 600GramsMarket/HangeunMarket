@@ -1,6 +1,7 @@
 package com.example.hangeunmarket.ui.home
 
 import HomeViewModel
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.PopupMenu
+import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -91,8 +95,38 @@ class HomeFragment : Fragment() {
             showPopupMenu(it) //팝업 메뉴 띄우기
         }
 
+        binding.ivSearch.setOnClickListener {
+            // 다이얼로그 레이아웃 설정
+            val dialogView = layoutInflater.inflate(R.layout.dialog_search, null)
+            val etMinPrice = dialogView.findViewById<EditText>(R.id.etMinPrice)
+            val etMaxPrice = dialogView.findViewById<EditText>(R.id.etMaxPrice)
+            val rgSaleStatus = dialogView.findViewById<RadioGroup>(R.id.rgSaleStatus)
+
+            val dialog = AlertDialog.Builder(context)
+                .setView(dialogView)
+                .setPositiveButton("검색") { dialog, _ ->
+                    val minPrice = etMinPrice.text.toString().toIntOrNull() ?: 0
+                    val maxPrice = etMaxPrice.text.toString().toIntOrNull() ?: Int.MAX_VALUE
+                    val isSale = when (rgSaleStatus.checkedRadioButtonId) {
+                        R.id.rbSale -> false
+                        R.id.rbSoldOut -> true
+                        else -> false // 기본값 설정(아직 판매 안된글만)
+                    }
+
+                    homeViewModel.filterData(minPrice, maxPrice, isSale)
+                    tvPlace.text = "검색결과"
+                    dialog.dismiss()
+                }
+                .setNegativeButton("취소") { dialog, _ -> dialog.dismiss() }
+                .create()
+
+            dialog.show()
+        }
+
         return binding.root
     }
+
+
 
 
 
@@ -109,7 +143,7 @@ class HomeFragment : Fragment() {
                 R.id.menu_item_all -> {
                     // "전체" 클릭시
                     homeViewModel.changeSaleItemForSelectedPlace("전체")
-                    tvPlace.text = "전체"
+                    tvPlace.text = "한성대"
                     true
                 }
                 R.id.menu_item_sangsang -> {

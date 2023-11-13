@@ -66,7 +66,7 @@ class SalePostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sale_post)
 
-        dbRef = FirebaseDatabase.getInstance().getReference("user")
+
 
         //Init Layout
         tvSaleTitle = findViewById(R.id.tv_sale_title)
@@ -102,6 +102,8 @@ class SalePostActivity : AppCompatActivity() {
         tvSaleItemInfo.text = saleItemInfo
         tvSalePrice.text = salePrice.toString()
         tvSellerName.text = sellerName
+
+        dbRef = FirebaseDatabase.getInstance().getReference("user")
 
         dbRef.child(sellerUId)
             .get().addOnSuccessListener { snapshot ->
@@ -179,10 +181,12 @@ class SalePostActivity : AppCompatActivity() {
             ) {
                 when (position) {
                     0 -> {
+                        dbRef = FirebaseDatabase.getInstance().getReference("sales")
                         dbRef.child(saleItemId).child("sale").setValue(false) // 판매 중으로 변경
                         Log.d("SpinnerSelection", "판매 중 선택됨")
                     }
                     1 -> {
+                        dbRef = FirebaseDatabase.getInstance().getReference("sales")
                         dbRef.child(saleItemId).child("sale").setValue(true)
                         Log.d("SpinnerSelection", "판매 완료 선택됨")
                     }
