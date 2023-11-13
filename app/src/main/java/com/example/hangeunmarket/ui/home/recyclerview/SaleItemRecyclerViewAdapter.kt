@@ -3,6 +3,7 @@ package com.example.hangeunmarket.ui.home.recyclerview
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,21 +12,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
+import com.example.hangeunmarket.ui.chat.recyclerview.MessageAdapter
 import com.example.hangeunmarket.ui.salepost.SalePostActivity
 import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.storage
 
 // 4.아이템을 유지/관리하는 Adapter
 class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
-    RecyclerView.Adapter<SaleItemRecyclerViewAdapter.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
 
     private var saleItems: List<SaleItem> = emptyList() //화면에 보여줄 데이터들
 
-    //(2) ViewHolder패턴 => View를 Holder에 넣어두었다가 재사용을 하기 위함
-    //=> itemView는 onCreateViewHolder에서 전달받은 아이템 뷰의 레이아웃에 해당
-    //=> onBindViewHolder에서 view에 groups의 값을 할당함
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    // 사용할 뷰 홀더가 2개이므로, 타입을 정하기 위해
+    val SALE: Int = 1 //판매중
+    val SOLDOUT: Int = 2 //판매완료
+
+
+    //판매중인 아이템
+    class SaleItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var saleItemImage = itemView.findViewById<ImageView>(R.id.iv_sale_item)
         var saleTitle = itemView.findViewById<TextView>(R.id.txt_sale_title)
@@ -33,15 +39,40 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
         var salePlace = itemView.findViewById<TextView>(R.id.txt_sale_place)
     }
 
-    //아이템 뷰의 레이아웃을 가져와서 화면에 붙임 (1)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val context = parent.context
-        //화면에 뷰를 붙이기 위해 inflater가 필요
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        //아이템 뷰 레이아웃 가져오기
-        val view = inflater.inflate(R.layout.item_for_sale, parent, false)
+    //거래 완료 아이템
+    class SoldOutItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+        // 받은 메시지 텍스트뷰 객체 구현
+        var saleItemImage = itemView.findViewById<ImageView>(R.id.iv_sale_item)
+        var saleTitle = itemView.findViewById<TextView>(R.id.txt_sale_title)
+        var salePrice = itemView.findViewById<TextView>(R.id.txt_sale_price)
+        var salePlace = itemView.findViewById<TextView>(R.id.txt_sale_place)
+    }
 
-        return ViewHolder(view)
+
+    override fun getItemViewType(position: Int): Int {
+        //현재 물건
+        var saleItem = saleItems[position]
+
+        //현재 메시지의 id를 확인하여 나의 uid와 같다면 SEND 리턴
+        if(saleItem.sale == false){
+            Log.d("soldout","false")
+            return SALE //판매중일 경우
+        } else {
+            return SOLDOUT
+        }
+
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if(viewType == SALE){
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_for_sale, parent, false)
+            SaleItemViewHolder(view) // 판매 중
+        } else{
+            //
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_for_sold_out, parent, false)
+            SoldOutItemViewHolder(view) //판매 완료
+        }
     }
 
 
@@ -52,28 +83,47 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
 
     //(3)
     //itemView에 Array<SaleItem>의 값을 할당함
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val saleItem : SaleItem = saleItems[position]
 
         // 판매상품 이미지 Storage에서 가져와서 보여주기
-
         // Firebase Storage에서 이미지 참조 가져오기
         val storageReference = Firebase.storage.reference.child(saleItem.saleItemImage)
 
-        // 다운로드 URL을 가져와 Glide로 로드하기
-        storageReference.downloadUrl.addOnSuccessListener { uri ->
-            Glide.with(context)
-                .load(uri.toString())
-                .into(holder.saleItemImage)
-        }.addOnFailureListener {
-            // 에러 처리
+        if(holder.javaClass == SaleItemViewHolder::class.java){
+            //DownCasting
+            val viewHolder = holder as SaleItemViewHolder
+            viewHolder.apply {
+                saleTitle.text = saleItem.saleTitle
+                salePlace.text = saleItem.salePlace
+                salePrice.text = saleItem.salePrice.toString()
+            }
+            // 다운로드 URL을 가져와 Glide로 로드하기
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(context)
+                    .load(uri.toString())
+                    .into(holder.saleItemImage)
+            }.addOnFailureListener {
+                // 에러 처리
+            }
+        } else { //받는 메시지라면
+            //DownCasting
+            val viewHolder = holder as SoldOutItemViewHolder
+            viewHolder.apply {
+                saleTitle.text = saleItem.saleTitle
+                salePlace.text = saleItem.salePlace
+                salePrice.text = saleItem.salePrice.toString()
+            }
+            // 다운로드 URL을 가져와 Glide로 로드하기
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                Glide.with(context)
+                    .load(uri.toString())
+                    .into(holder.saleItemImage)
+            }.addOnFailureListener {
+                // 에러 처리
+            }
         }
 
-        holder.apply {
-            saleTitle.text = saleItem.saleTitle
-            salePlace.text = saleItem.salePlace
-            salePrice.text = saleItem.salePrice.toString()
-        }
 
         //아이템 클릭 이벤트 작성r
         holder.itemView.setOnClickListener {
@@ -94,6 +144,8 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
         }
 
     }
+
+
 
     // 스토리지에서 이미지 가져와서 표시하기
     private fun displayImageRef(imageRef: StorageReference?, view:ImageView){

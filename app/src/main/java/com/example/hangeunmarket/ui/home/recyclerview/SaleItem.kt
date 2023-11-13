@@ -9,7 +9,7 @@ data class SaleItem(
     val salePlace: String = "", // txt_sale_place 판매 장소
     val salePrice: Int = 0, // txt_sale_price 판매 가격
     val sellerUID: String = "",
-    val isSale: Boolean = false,
+    val sale: Boolean = false,
     val sellerName: String = "",
     val saleContent: String = "",
 )
