@@ -1,21 +1,22 @@
 package com.example.hangeunmarket.ui.salepost
 
+import com.example.hangeunmarket.R
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuInflater
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.Spinner
 import android.widget.TextView
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.hangeunmarket.R
 import com.example.hangeunmarket.ui.chat.ChattingRoomActivity
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.storage
 
 
@@ -32,6 +33,8 @@ class SalePostActivity : AppCompatActivity() {
     private lateinit var tvSalePrice : TextView
     private lateinit var tvSellerName : TextView
     private lateinit var ivSaleItemImage : ImageView
+    private lateinit var goChatting:Button
+    private lateinit var spinnerSaleStatus: Spinner //판매상태 수정 스피너
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,8 @@ class SalePostActivity : AppCompatActivity() {
         tvSalePrice = findViewById(R.id.tv_sale_price)
         tvSellerName = findViewById(R.id.tv_user_name)
         ivSaleItemImage = findViewById(R.id.iv_sale_item_image)
-
+        spinnerSaleStatus = findViewById<Spinner>(R.id.spinner_sale_status)
+        goChatting = findViewById<Button>(R.id.btn_go_chatting)
 
         /*
         *   intent.putExtra("saleTitle",saleItem.saleTitle) //제목
@@ -63,6 +67,7 @@ class SalePostActivity : AppCompatActivity() {
         var sellerName = intent.getStringExtra("sellerName") // 판매자 이름
         var sellerUId = intent.getStringExtra("sellerUId") // 판매자 UID
         var saleItemImageName = intent.getStringExtra("saleItemImage") //판매 상품 이미지 이름
+        var isSale = intent.getBooleanExtra("isSale",false) //판매중이라면 false임
         Log.d("ImageTest","이미지 추출 ${saleItemImageName}")
 
 
@@ -74,6 +79,7 @@ class SalePostActivity : AppCompatActivity() {
         tvSaleItemInfo.text = saleItemInfo
         tvSalePrice.text = salePrice
         tvSellerName.text = sellerName
+
 
         // 이미지가 존재할 경우에만 이미지 불러오기
         if (saleItemImageName != null){
@@ -91,11 +97,38 @@ class SalePostActivity : AppCompatActivity() {
         }
 
 
-        //
+        // 수정하기 팝업메뉴
         val popup = findViewById<ImageView>(R.id.iv_item_setting)
         popup.setOnClickListener {
             showPopupMenu(it) //it == popup
         }
+
+
+        // Firebase Authentication 인스턴스
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        // 현재 사용자 UID와 게시글 판매자 UID 비교하여 스피너 가시성 설정
+        if (currentUserUid != null && sellerUId != null && currentUserUid == sellerUId) {
+            // 현재 사용자가 판매자인 경우
+            spinnerSaleStatus.visibility = View.VISIBLE // 판매상태 수정 권한 부여
+            goChatting.isEnabled = false //판매 제안 버튼 비활성화
+            val spinnerSaleStatusIndex = if (isSale) 1 else 0 // '판매 중': 0, '판매 완료': 1
+            spinnerSaleStatus.setSelection(spinnerSaleStatusIndex)
+        } else {
+            spinnerSaleStatus.visibility = View.GONE // 현재 사용자가 판매자가 아닌 경우 스피너 숨기기
+        }
+
+        // 판매중 - 판매완료 스피너
+        // 스피너 초기값 설정
+        val spinnerSaleStatusIndex = if (isSale) 1 else 0 // '판매 중': 0, '판매 완료': 1
+
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.sale_status_array, android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerSaleStatus.adapter = adapter
+        spinnerSaleStatus.setSelection(spinnerSaleStatusIndex)
+
 
 
 
@@ -105,9 +138,10 @@ class SalePostActivity : AppCompatActivity() {
         receiverName = intent.getStringExtra("name").toString() //상대방 이름
         receivedUid = intent.getStringExtra("uId").toString() //상대방 uId
         * */
-        var goChatting = findViewById<Button>(R.id.btn_go_chatting)
+
         goChatting.setOnClickListener {
             //채팅방으로 넘어가기
+            Log.d("채팅","버튼 눌려짐")
             val intent = Intent(this@SalePostActivity,ChattingRoomActivity::class.java)
             intent.putExtra("name",sellerName) //판매자 이름
             intent.putExtra("uId",sellerUId) //판매자 uId
@@ -129,12 +163,12 @@ class SalePostActivity : AppCompatActivity() {
         val popupMenu = PopupMenu(this, view)
         val inflater: MenuInflater = popupMenu.menuInflater
         //어떤 메뉴를 띄워줄지
-        inflater.inflate(R.menu.menu_popup, popupMenu.menu)
+        inflater.inflate(com.example.hangeunmarket.R.menu.menu_popup, popupMenu.menu)
 
         //메뉴 클릭시 동작 정의
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.menu_item_all -> {
+                com.example.hangeunmarket.R.id.menu_item_all -> {
                     // 수정 클릭시
                     true
                 }

@@ -91,6 +91,9 @@ class SaleWritingActivity : AppCompatActivity() {
                             intent.putExtra("salePlace",place) // 판매장소
                             intent.putExtra("sellerName",name) // 판매자 이름
                             intent.putExtra("sellerUId",uid) // 판매자 UID
+                            //처음 작성하는 경우 isSale상태는 무조건 false(아직 판매가 진행중)이라고 가정
+                            intent.putExtra("isSale",false)
+
                             // 성공 시, 이미지 업로드
                             selectedImageUri?.let { uri ->
                                 uploadImageToFirebaseStorage(uri) { imageName ->
