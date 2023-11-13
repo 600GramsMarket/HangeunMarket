@@ -36,6 +36,8 @@ class SalePostActivity : AppCompatActivity() {
     private lateinit var goChatting:Button
     private lateinit var spinnerSaleStatus: Spinner //판매상태 수정 스피너
 
+    private lateinit var saleItemId:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sale_post)
@@ -59,6 +61,9 @@ class SalePostActivity : AppCompatActivity() {
             intent.putExtra("saleItemImage",saleItem.saleItemImage) //이미지url
         * */
         Log.d("ImageTest","엑티비티 이동")
+
+        //판매 상품 id
+        saleItemId = intent.getStringExtra("saleItemId")!!
 
         var saleTitle = intent.getStringExtra("saleTitle") // 제목
         var salePrice = intent.getStringExtra("salePrice") // 가격
@@ -168,8 +173,13 @@ class SalePostActivity : AppCompatActivity() {
         //메뉴 클릭시 동작 정의
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                com.example.hangeunmarket.R.id.menu_item_all -> {
+                R.id.menu_edit -> {
                     // 수정 클릭시
+                    Log.d("테스트","수정 클릭됨")
+                    val intent = Intent(this@SalePostActivity,SaleWritingActivity::class.java)
+                    //게시글 아이디 넣어서 화면 이동
+                    intent.putExtra("saleItemId",saleItemId) //판매 아이템 아이디 넘겨주기
+                    startActivity(intent)
                     true
                 }
                 else -> false

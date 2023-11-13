@@ -87,6 +87,7 @@ class SaleItemRecyclerViewAdapter(var context: Context) : //화면에 데이터�
             intent.putExtra("sellerUId",saleItem.sellerUID) //판매자 UID
             intent.putExtra("sellerName",saleItem.sellerName) //판매자 이름
             intent.putExtra("saleItemImage",saleItem.saleItemImage) //이미지url
+            intent.putExtra("saleItemId",saleItem.id) //판매상품의 id
 
 
             context.startActivity(intent)

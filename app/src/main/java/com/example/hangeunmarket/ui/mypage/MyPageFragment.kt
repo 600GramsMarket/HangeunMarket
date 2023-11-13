@@ -3,14 +3,12 @@ package com.example.hangeunmarket.ui.mypage
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hangeunmarket.databinding.FragmentMypageBinding
 import com.example.hangeunmarket.ui.login.LoginActivity
-import com.example.hangeunmarket.ui.login.LoginStartFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
