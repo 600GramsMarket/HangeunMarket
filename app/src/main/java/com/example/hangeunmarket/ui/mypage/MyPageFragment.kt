@@ -2,16 +2,20 @@ package com.example.hangeunmarket.ui.mypage
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hangeunmarket.databinding.FragmentMypageBinding
+import com.example.hangeunmarket.ui.dto.User
 import com.example.hangeunmarket.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -28,6 +32,14 @@ class MyPageFragment : Fragment() {
 
     //Firebase Authentication
     private lateinit var auth: FirebaseAuth
+
+    val predefinedColors = listOf(
+        Color.parseColor("#FFC107"), // Amber
+        Color.parseColor("#FF5722"), // Deep Orange
+        Color.parseColor("#4CAF50"), // Green
+        Color.parseColor("#03A9F4")  // Light Blue
+    )
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +69,25 @@ class MyPageFragment : Fragment() {
             activity?.finish() //현재 엑티비티 종료
             startActivity(intent) //시작화면으로 돌아가기
         }
+
+        val dbRef = FirebaseDatabase.getInstance().getReference("user")
+        dbRef.child(Firebase.auth.currentUser?.uid!!)
+            .get().addOnSuccessListener { snapshot ->
+                if (snapshot.exists()) {
+                    val user = snapshot.getValue(User::class.java)
+                    user?.let { item ->
+                        Log.d("color","setColor")
+                        val colorId = item.colorId
+                        binding.cardviewMyProfile.setCardBackgroundColor(predefinedColors[colorId])
+                    }
+                } else {
+                    Log.i("firebase", "No data available for this item ID")
+                }
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
+
+
     }
 
 

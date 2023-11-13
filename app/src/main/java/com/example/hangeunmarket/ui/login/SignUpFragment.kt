@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlin.math.sign
+import kotlin.random.Random
 
 // firebase document
 // https://firebase.google.com/docs/build?hl=ko
@@ -100,7 +101,8 @@ class SignUpFragment : Fragment() {
 
     //DB에 사용자 정보 추가
     private fun addUser(userEmail: String, name:String, school:String, uId:String){
-        database.child("user").child(uId).setValue(User(name,userEmail,school,uId))
+        val randInt = Random.nextInt(0,4)
+        database.child("user").child(uId).setValue(User(randInt,name,userEmail,school,uId))
 
     }
 

@@ -2,10 +2,12 @@ package com.example.hangeunmarket.ui.salepost
 
 import com.example.hangeunmarket.R
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuInflater
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
@@ -14,11 +16,16 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
 import com.example.hangeunmarket.ui.chat.ChattingRoomActivity
+import com.example.hangeunmarket.ui.dto.User
+import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
 import com.google.android.play.integrity.internal.f
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.storage
 
 
@@ -37,15 +44,29 @@ class SalePostActivity : AppCompatActivity() {
     private lateinit var ivSaleItemImage : ImageView
     private lateinit var goChatting:Button
     private lateinit var spinnerSaleStatus: Spinner //판매상태 수정 스피너
-    private lateinit var saleItemId:String //판매 상품의 id값
+    private lateinit var cardviewUser:CardView
 
+    private lateinit var saleItemId:String //판매 상품의 id값
     private lateinit var currentUserUid: String //현재 유저의 uid
     private lateinit var sellerUId:String // 판매자 uid
+
+    private lateinit var dbRef : DatabaseReference
+
+    val predefinedColors = listOf(
+        Color.parseColor("#FFC107"), // Amber
+        Color.parseColor("#FF5722"), // Deep Orange
+        Color.parseColor("#4CAF50"), // Green
+        Color.parseColor("#03A9F4")  // Light Blue
+    )
+
+    // holder.cardView.setCardBackgroundColor(predefinedColors[currentUser.chatItemImage])
 
     //판매 글 보기에 대한 로직
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sale_post)
+
+        dbRef = FirebaseDatabase.getInstance().getReference("user")
 
         //Init Layout
         tvSaleTitle = findViewById(R.id.tv_sale_title)
@@ -56,6 +77,10 @@ class SalePostActivity : AppCompatActivity() {
         ivSaleItemImage = findViewById(R.id.iv_sale_item_image)
         spinnerSaleStatus = findViewById(R.id.spinner_sale_status)
         goChatting = findViewById(R.id.btn_go_chatting)
+        cardviewUser = findViewById(R.id.cardview_user)
+
+
+
 
         Log.d("ImageTest","엑티비티 이동")
 
@@ -69,7 +94,7 @@ class SalePostActivity : AppCompatActivity() {
         var sellerName = intent.getStringExtra("sellerName") // 판매자 이름
         sellerUId = intent.getStringExtra("sellerUId")!! // 판매자 UID
         var saleItemImageName = intent.getStringExtra("saleItemImage") //판매 상품 이미지 이름
-        var isSale = intent.getBooleanExtra("isSale",false) //판매중이라면 false임
+        var isSale = intent.getBooleanExtra("sale",false) //판매중이라면 false임
 
         //화면에 정보 뿌리기
         tvSaleTitle.text = saleTitle
@@ -77,6 +102,22 @@ class SalePostActivity : AppCompatActivity() {
         tvSaleItemInfo.text = saleItemInfo
         tvSalePrice.text = salePrice.toString()
         tvSellerName.text = sellerName
+
+        dbRef.child(sellerUId)
+            .get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                val user = snapshot.getValue(User::class.java)
+                user?.let { item ->
+                    Log.d("color","setColor")
+                    val colorId = item.colorId
+                    cardviewUser.setCardBackgroundColor(predefinedColors[colorId])
+                }
+            } else {
+                Log.i("firebase", "No data available for this item ID")
+            }
+        }.addOnFailureListener {
+            Log.e("firebase", "Error getting data", it)
+        }
 
 
         // 이미지가 존재할 경우에만 이미지 불러오기
@@ -129,15 +170,29 @@ class SalePostActivity : AppCompatActivity() {
         spinnerSaleStatus.adapter = adapter
         spinnerSaleStatus.setSelection(spinnerSaleStatusIndex)
 
+        spinnerSaleStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> {
+                        dbRef.child(saleItemId).child("sale").setValue(false) // 판매 중으로 변경
+                        Log.d("SpinnerSelection", "판매 중 선택됨")
+                    }
+                    1 -> {
+                        dbRef.child(saleItemId).child("sale").setValue(true)
+                        Log.d("SpinnerSelection", "판매 완료 선택됨")
+                    }
+                }
+            }
 
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
 
-
-
-        //채팅 버튼 클릭시
-        /*
-        receiverName = intent.getStringExtra("name").toString() //상대방 이름
-        receivedUid = intent.getStringExtra("uId").toString() //상대방 uId
-        * */
 
         goChatting.setOnClickListener {
             //채팅방으로 넘어가기
