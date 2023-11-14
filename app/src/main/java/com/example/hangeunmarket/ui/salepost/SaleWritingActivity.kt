@@ -62,6 +62,7 @@ class SaleWritingActivity : AppCompatActivity() {
         val SALE_ITEM_ID = intent.getStringExtra("saleItemId")
         Log.d("테스트","#1 ${SALE_ITEM_ID}")
         //intent에 담아온 정보가 존재한다면 값 초기화
+        // => 수정하기 모드에 해당함
         if(SALE_ITEM_ID != null){
             Log.d("테스트","#2 ${SALE_ITEM_ID} ")
             setValueOfPost(SALE_ITEM_ID) //아이디를 바탕으로 값 얻어와서 수정하기
@@ -197,6 +198,8 @@ class SaleWritingActivity : AppCompatActivity() {
                     if (saleItemUri != null){
                         // Firebase Storage에서 이미지 참조 가져오기
                         val storageReference = Firebase.storage.reference.child(saleItemUri)
+
+                        isImageUpload = true //이미지가 존재한다고 알림
 
                         // 다운로드 URL을 가져와 Glide로 로드하기
                         storageReference.downloadUrl.addOnSuccessListener { uri ->
