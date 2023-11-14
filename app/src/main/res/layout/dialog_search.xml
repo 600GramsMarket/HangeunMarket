@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="가격 :"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginLeft="10dp"
@@ -58,6 +58,7 @@
         android:id="@+id/rgSaleStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <RadioButton
