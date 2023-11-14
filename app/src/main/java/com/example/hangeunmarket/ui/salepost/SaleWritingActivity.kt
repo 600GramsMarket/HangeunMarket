@@ -96,7 +96,6 @@ class SaleWritingActivity : AppCompatActivity() {
                 }
             } else {
 
-
                 val sharedPref = getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
                 val name = sharedPref?.getString("userName","알 수 없음")
                 val uid = Firebase.auth.currentUser?.uid!! //나의 uid에 해당(현재 접속한 유저)
