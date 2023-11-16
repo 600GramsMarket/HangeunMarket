@@ -39,6 +39,8 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/9fc7215f-0244-4
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/5bed04ba-e3b1-469a-a1c8-b936fade04f8" width="200"/>
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/59f5a0c3-7db8-4e6d-b7b9-7ee9aa0717c1" width="200"/>
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/b3a10eb7-d066-46c4-974b-92d050f4c52c" width="200"/> 
+</p>
+<p float="left">
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/5b1fbef9-560c-4779-a59a-fa7286986ea5" width="200"/>
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/c6d08978-22b9-43a7-97e5-1dc752c9b15d" width="200"/>
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/a6159ecc-9b69-4515-9c0e-882666d2a827" width="200"/>
