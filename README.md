@@ -82,9 +82,6 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/7adc1016-a428-4
 
 https://github.com/600GramsMarket/HangeunMarket/assets/109474668/ca55017d-4905-4bbf-88d6-eb12928158e4
 
-https://github.com/600GramsMarket/HangeunMarket/assets/109474668/68f71172-1e82-4dbd-b0af-44977ebeb104
-
-
  
 ## 4. 상품 필터링 기능
 
