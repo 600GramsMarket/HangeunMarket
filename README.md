@@ -87,10 +87,18 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/68f71172-1e82-4
  
 ## 4. 상품 필터링 기능
 
+<p float="left">
+  <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/972f7ebd-d5d9-42f5-8695-c8eb9db18621" width="200"/>
+  <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/d7774aae-5be5-436c-9ae1-74a9140d0403" width="200"/>
+</p>
+
+
 - 상품 필터링 검색 기능
   - 왼쪽의 장소 선택을 통해, 상품의 거래 위치를 선택할 수 있습니다.
   - 오른쪽 상단의 돋보기를 눌러 상품의 상태(판매완료/판매중)와 가격 범위를 선택받아 원하는 상품 검색이 가능합니다.
 
+
+https://github.com/600GramsMarket/HangeunMarket/assets/109474668/c718b745-7e1c-475e-b0e7-350694880ab1
 
 
 <br><br>
