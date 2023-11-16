@@ -1,6 +1,4 @@
-# HangeunMarket
-
-![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=Promi&fontSize=60&fontAlign=78&fontAlignY=38](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=%ED%95%9C%EA%B7%BC%EB%A7%88%EC%BC%93&fontSize=60&fontAlign=78&fontAlignY=38)
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=한근마켓&fontSize=60&fontAlign=78&fontAlignY=38)
 
 <div align="center">
 
