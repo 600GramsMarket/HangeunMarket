@@ -65,6 +65,7 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/9fc7215f-0244-4
 https://github.com/600GramsMarket/HangeunMarket/assets/109474668/f725e6f5-aac8-44f9-afee-2d9d78df81f1
 
 
+https://github.com/600GramsMarket/HangeunMarket/assets/109474668/7adc1016-a428-4cf1-9062-eff400e3cc12
 
   
 ## 3. 채팅(거래 제안)기능
