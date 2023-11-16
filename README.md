@@ -28,11 +28,10 @@
   
 - Email / Password를 이용한 로그인
   - `Firebase Authentication`를 이용하여 사용자가 입력한 이메일과 비밀번호가 유효한지 확인 후, 로그인을 승인합니다.
-  
-<p float="left">
-  <iframe width="560" height="315" src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/4e638572-28e7-486d-83f8-728347ef1f71" frameborder="0" allowfullscreen></iframe>
-  <iframe width="560" height="315" src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/eee396b9-f785-44f9-b3d6-8618a73941c0" frameborder="0" allowfullscreen></iframe>
-</p>
+
+https://github.com/600GramsMarket/HangeunMarket/assets/109474668/4e638572-28e7-486d-83f8-728347ef1f71
+https://github.com/600GramsMarket/HangeunMarket/assets/109474668/eee396b9-f785-44f9-b3d6-8618a73941c0
+
 
 
 
