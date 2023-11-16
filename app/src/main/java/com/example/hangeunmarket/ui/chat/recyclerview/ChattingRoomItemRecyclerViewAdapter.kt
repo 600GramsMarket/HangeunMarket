@@ -17,7 +17,7 @@ import com.example.hangeunmarket.ui.chat.ChattingRoomActivity
 class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
     RecyclerView.Adapter<ChattingRoomItemRecyclerViewAdapter.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
 
-    private var chattingRoomItems: List<ChattingRoomItem> = emptyList() //화면에 보여줄 데이터들
+    private var chattingRoomItems: List<ChattingRoomItem> = emptyList() //화면에 보여줄 데이터들d
 
     val predefinedColors = listOf(
         Color.parseColor("#FFC107"), // Amber
@@ -25,6 +25,11 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
         Color.parseColor("#4CAF50"), // Green
         Color.parseColor("#03A9F4")  // Light Blue
     )
+
+    fun setChattingRoomItem(items: List<ChattingRoomItem>) {
+        this.chattingRoomItems = items
+        notifyDataSetChanged()
+    }
 
 
     //(2) ViewHolder패턴 => View를 Holder에 넣어두었다가 재사용을 하기 위함
@@ -56,12 +61,6 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
         val view = inflater.inflate(R.layout.item_chatting_room, parent, false)
 
         return ViewHolder(view)
-    }
-
-
-    fun setChattingRoomItem(items: List<ChattingRoomItem>) {
-        this.chattingRoomItems = items
-        notifyDataSetChanged()
     }
 
     //(3)
