@@ -25,12 +25,14 @@
 - Email / Password를 이용한 회원가입
   - 사용자로부터 Email, Password, 이름, 소속, 등의 정보를 입력받아 회원가입을 진행합니다.
   - 회원가입은 `Firebase Authentication`를 통해 이루어지며, 사용자 정보는 `Firebase Realtime Database`에 저장됩니다.
-
-<br>
+  
 - Email / Password를 이용한 로그인
   - `Firebase Authentication`를 이용하여 사용자가 입력한 이메일과 비밀번호가 유효한지 확인 후, 로그인을 승인합니다.
-<br>
-
+  
+<p float="left">
+  <iframe width="560" height="315" src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/4e638572-28e7-486d-83f8-728347ef1f71" frameborder="0" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/eee396b9-f785-44f9-b3d6-8618a73941c0" frameborder="0" allowfullscreen></iframe>
+</p>
 
 
 
