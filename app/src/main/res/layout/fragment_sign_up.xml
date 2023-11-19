@@ -92,6 +92,7 @@
             android:layout_marginTop="10dp"/>
 
 
+        <!--비밀번호-->
         <TextView
             android:id="@+id/tv_pw_again"
             android:layout_width="wrap_content"
@@ -119,6 +120,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="10dp"/>
 
+
+        <!--이름-->
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
@@ -146,12 +149,82 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="10dp"/>
 
+
+        <!--생년월일-->
+        <TextView
+            android:id="@+id/tv_born_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/et_name"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="13dp"
+            android:text="생년월일"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_born_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_born_date"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+
+            <EditText
+                android:layout_weight="33"
+                android:id="@+id/et_born_year"
+                android:background="@drawable/shape_edit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:hint="년(4글자)"
+                android:paddingStart="5dp"
+                android:textColorHint="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/tv_born_date"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <EditText
+                android:layout_weight="33"
+                android:id="@+id/et_born_month"
+                android:background="@drawable/shape_edit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:hint="월"
+                android:paddingStart="5dp"
+                android:textColorHint="@color/gray"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_born_date"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <EditText
+                android:layout_weight="33"
+                android:id="@+id/et_born_date"
+                android:background="@drawable/shape_edit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:hint="일"
+                android:paddingStart="5dp"
+                android:textColorHint="@color/gray"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_born_date"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+        </LinearLayout>
+
+
+
+
+
         <TextView
             android:id="@+id/tv_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="단과대학"
-            app:layout_constraintTop_toBottomOf="@id/et_name"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout_born_data"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="13dp"
             android:textColor="@color/black"
