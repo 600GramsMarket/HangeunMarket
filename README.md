@@ -18,7 +18,7 @@
 ## 1. 회원가입 / 로그인
 
 <p float="left">
-  <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/133d69ab-694c-4acc-871e-1f20a024f955" width="200"/>
+  <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/c591db2f-805c-4cc0-b684-7e951504face" width="200"/>
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/67a08611-82e1-4e1f-9585-55d4eccf4e09" width="200"/> 
 </p>
 
@@ -31,7 +31,8 @@
 
 https://github.com/600GramsMarket/HangeunMarket/assets/109474668/581cd552-0444-4352-b360-b876c9ac8a97
 
-https://github.com/600GramsMarket/HangeunMarket/assets/109474668/9fc7215f-0244-4993-9400-41f2cdb47eab
+https://github.com/600GramsMarket/HangeunMarket/assets/109474668/bdbfb51b-7a63-4113-a436-dfab436bcdf2
+
 
 ## 2. 게시글 등록/수정/삭제
 
@@ -62,12 +63,14 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/9fc7215f-0244-4
 
 
 
+
 https://github.com/600GramsMarket/HangeunMarket/assets/109474668/f725e6f5-aac8-44f9-afee-2d9d78df81f1
 
+https://github.com/600GramsMarket/HangeunMarket/assets/109474668/bca200e0-5895-4db4-9d79-29b2536c71f8
 
-https://github.com/600GramsMarket/HangeunMarket/assets/109474668/7adc1016-a428-4cf1-9062-eff400e3cc12
 
-  
+
+
 ## 3. 채팅(거래 제안)기능
 
 <p float="left">
