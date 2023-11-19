@@ -60,18 +60,42 @@ class SignUpFragment : Fragment() {
         btnSingUp.setOnClickListener {
             val userEmail = binding.etEmail.text.toString() // 사용자 이메일
             val userPassword = binding.etPassword.text.toString() // 사용자 비밀번호
+            val userPasswordAgain = binding.etPasswordAgain.text.toString() // 비밀번호 재입력
             val userName = binding.etName.text.toString() // 사용자 이름
             val userSchool = binding.etSchool.text.toString() // 사용자 소속
 
+            // 사용자 생년월일 정보
+            val userBornYear = binding.etBornYear.text.toString() //사용자가 태어난 년
+            val userBornMonth = binding.etBornMonth.text.toString() //사용자가 태어난 달
+            val userBornDate = binding.etBornDate.text.toString() //사용자가 태어난 일
+            val userBornData = "${userBornYear}-${userBornMonth}-${userBornDate}"
+
+
             //유효성 검사 로직 작성 필요
             //아이디와 비밀번호를 모두 입력했는지, 이메일의 형식을 지켰는지, 비밀번호는 특수문자를 포함하고있는지 등
-            signUp(userEmail,userPassword,userName,userSchool)
+            // 유효성 검사
+            if (userEmail.isBlank() || userPassword.isBlank() || userName.isBlank() ||
+                userSchool.isBlank() || userBornYear.isBlank() ||
+                userBornMonth.isBlank() || userBornDate.isBlank() ||
+                userPassword != userPasswordAgain) {
+                Toast.makeText(activity, "모든 정보를 채워주세요! 비밀번호가 일치하는지 확인해주세요.", Toast.LENGTH_SHORT).show()
+            } else if (!isValidPassword(userPassword)) {
+                Toast.makeText(activity, "비밀번호는 영어, 숫자, 특수문자 조합의 6자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                signUp(userEmail, userPassword, userName, userSchool, userBornData)
+            }
         }
 
     }
 
+    // 비밀번호 복잡성 검사 함수
+    private fun isValidPassword(password: String): Boolean {
+        val passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&])[A-Za-z\\d@\$!%*#?&]{6,}\$"
+        return password.matches(passwordPattern.toRegex())
+    }
+
     //회원가입 수행 => 회원가입에 성공하면 메인 엑티비티로 이동
-    private fun signUp(userEmail: String, password: String, name:String, school:String) {
+    private fun signUp(userEmail: String, password: String, name:String, school:String,userBornData:String) {
         Firebase.auth.createUserWithEmailAndPassword(userEmail, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
@@ -83,7 +107,7 @@ class SignUpFragment : Fragment() {
 
                     //RealTimeDatabase에 사용자 정보 추가 => 사용자가 생성된 상태이므로 UID가 부여된 상태임
                     val uId = auth.currentUser?.uid!! //현재 사용자의 uid
-                    addUser(userEmail, name, school, uId) //데이터베이스에 사용자 추가
+                    addUser(userEmail, name, school, uId, userBornData) //데이터베이스에 사용자 추가
 
                     //sharedPreference에 사용자 정보 저장
                     saveUserInFoToSharedPreference(userEmail, name, school)
@@ -100,9 +124,9 @@ class SignUpFragment : Fragment() {
     }
 
     //DB에 사용자 정보 추가
-    private fun addUser(userEmail: String, name:String, school:String, uId:String){
+    private fun addUser(userEmail: String, name:String, school:String, uId:String, userBornData:String){
         val randInt = Random.nextInt(0,4)
-        database.child("user").child(uId).setValue(User(randInt,name,userEmail,school,uId))
+        database.child("user").child(uId).setValue(User(randInt,name,userEmail,school,uId,userBornData))
 
     }
 
