@@ -78,7 +78,7 @@ class SignUpFragment : Fragment() {
                 userSchool.isBlank() || userBornYear.isBlank() ||
                 userBornMonth.isBlank() || userBornDate.isBlank() ||
                 userPassword != userPasswordAgain) {
-                Toast.makeText(activity, "모든 정보를 채워주세요! 비밀번호가 일치하는지 확인해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "모든 정보를 채워주세요!\n비밀번호가 일치하는지 확인해주세요.", Toast.LENGTH_SHORT).show()
             } else if (!isValidPassword(userPassword)) {
                 Toast.makeText(activity, "비밀번호는 영어, 숫자, 특수문자 조합의 6자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
             } else {
