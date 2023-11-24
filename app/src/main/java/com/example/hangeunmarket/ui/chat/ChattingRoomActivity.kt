@@ -12,10 +12,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.database
 import com.example.hangeunmarket.ui.dto.Message
+import com.example.hangeunmarket.ui.dto.User
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 //채팅방
@@ -42,7 +44,6 @@ class ChattingRoomActivity : AppCompatActivity() {
     private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messageRecyclerViewAdapter : MessageAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChattingRoomBinding.inflate(layoutInflater)
@@ -55,6 +56,8 @@ class ChattingRoomActivity : AppCompatActivity() {
         // 정보 담기
         receiverName = intent.getStringExtra("name").toString() //상대방 이름
         receivedUid = intent.getStringExtra("uId").toString() //상대방 uId
+
+        getUserInfo(receivedUid) // 상대방 정보 얻어오기
 
         // 접속자 UID
         val senderUid = auth.currentUser?.uid
@@ -89,7 +92,6 @@ class ChattingRoomActivity : AppCompatActivity() {
                 }
             binding.etMessage.setText("") //초기화
         }
-
         //대화목록 초기화
         messageList = ArrayList()
 
@@ -121,5 +123,23 @@ class ChattingRoomActivity : AppCompatActivity() {
             })
 
 
+    }
+
+    private fun getUserInfo(receivedUid:String){
+        val dbRef = database.child("user").child(receivedUid)
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val user = snapshot.getValue(User::class.java)
+                if(user!=null){
+                    messageRecyclerViewAdapter.setReceiverInformation(user.colorId,user.name)
+                }
+                Log.d("userInformation",user.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+                Log.d("userInformation","fail to get data")
+            }
+        })
     }
 }

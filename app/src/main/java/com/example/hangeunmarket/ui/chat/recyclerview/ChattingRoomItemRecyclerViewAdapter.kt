@@ -89,4 +89,6 @@ class ChattingRoomItemRecyclerViewAdapter(var context: Context) : //화면에 �
     override fun getItemCount(): Int {
         return chattingRoomItems.size
     }
+
+
 }

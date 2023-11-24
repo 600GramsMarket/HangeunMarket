@@ -4,15 +4,48 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_user_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="@color/gray">
+
+        <ImageView
+            android:id="@+id/iv_my_profile"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_meat_logo3"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="보내는 사람"
+        android:textSize="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/cardview_user_profile"
+        app:layout_constraintStart_toEndOf="@id/cardview_user_profile"
+        android:layout_marginLeft="7dp"/>
+
+
     <!--받는 메시지-->
     <TextView
         android:id="@+id/tv_receive_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toEndOf="@id/cardview_user_profile"
+        android:layout_marginLeft="5dp"
         android:layout_marginVertical="5dp"
         android:background="@drawable/shape_receive_message"
         android:padding="10dp"

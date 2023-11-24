@@ -33,7 +33,7 @@ class MyPageFragment : Fragment() {
     //Firebase Authentication
     private lateinit var auth: FirebaseAuth
 
-    val predefinedColors = listOf(
+    private val predefinedColors = listOf(
         Color.parseColor("#FFC107"), // Amber
         Color.parseColor("#FF5722"), // Deep Orange
         Color.parseColor("#4CAF50"), // Green
@@ -78,7 +78,7 @@ class MyPageFragment : Fragment() {
                     user?.let { item ->
                         Log.d("color","setColor")
                         val colorId = item.colorId
-                        binding.cardviewMyProfile.setCardBackgroundColor(predefinedColors[colorId])
+                        binding.cardviewUserProfile.setCardBackgroundColor(predefinedColors[colorId])
                     }
                 } else {
                     Log.i("firebase", "No data available for this item ID")

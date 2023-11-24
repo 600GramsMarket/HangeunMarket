@@ -50,20 +50,6 @@ class LoginStartFragment : Fragment() {
             }
         }
 
-
-        //Glide test
-//        val imageView = view.findViewById<ImageView>(R.id.iv_meat_logo)
-//        Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
-
-
-        //Fireabse Storage test
-//        val imageView = view.findViewById<ImageView>(R.id.iv_meat_logo)
-//        // 이미지 참조 가져오기
-//        val imageRef = Firebase.storage.getReferenceFromUrl(
-//            "gs://hangeunmarket.appspot.com/bugi.png"
-//        )
-//        displayImageRef(imageRef,imageView)
-
         // <이미 계정이 있나요? 로그인> 로직
         // 'text_button_sign_in' 클릭 시 SignInFragment로 교체
         val signInButton = view.findViewById<TextView>(R.id.text_button_sign_in)
