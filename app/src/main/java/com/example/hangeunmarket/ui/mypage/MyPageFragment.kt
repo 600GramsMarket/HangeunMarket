@@ -1,5 +1,6 @@
 package com.example.hangeunmarket.ui.mypage
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -64,10 +65,19 @@ class MyPageFragment : Fragment() {
 
         //signOut
         binding.tvLogOut.setOnClickListener {
-            auth.signOut() //로그아웃
-            val intent = Intent(this@MyPageFragment.activity,LoginActivity::class.java)
-            activity?.finish() //현재 엑티비티 종료
-            startActivity(intent) //시작화면으로 돌아가기
+            // AlertDialog를 생성하고 설정
+            AlertDialog.Builder(context)
+                .setTitle("로그아웃") // 다이얼로그 제목
+                .setMessage("로그아웃 하시겠습니까?") // 다이얼로그 메시지
+                .setPositiveButton("확인") { dialog, which ->
+                    // '확인' 버튼 클릭 시 로그아웃 수행
+                    auth.signOut() // 로그아웃
+                    val intent = Intent(this@MyPageFragment.activity, LoginActivity::class.java)
+                    activity?.finish() // 현재 액티비티 종료
+                    startActivity(intent) // 시작 화면으로 돌아가기
+                }
+                .setNegativeButton("취소", null) // '취소' 버튼 클릭 시 아무 동작도 수행하지 않음
+                .show() // 다이얼로그 표시
         }
 
         val dbRef = FirebaseDatabase.getInstance().getReference("user")
