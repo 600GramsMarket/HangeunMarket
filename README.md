@@ -54,12 +54,12 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/bdbfb51b-7a63-4
   
 - 게시글 수정/삭제
   - 게시글 수정은 현재 로그인한 계정과 게시글의 작성자가 동일한 경우에만 승인됩니다.
-  - 사용자와 판매자가 동일하지 않은 경우에만 '거래 제안하기' 버튼이 활성화 됩니다.
+  - 사용자와 판매자가 동일하지 않은 경우에만 `거래 제안하기` 버튼이 활성화 됩니다.
   - 게시글 수정버튼을 눌러서 상품 이미지를 포함한 상품 정보를 수정할 수 있습니다.
-  - 작성자가 동일할 경우 '수정/삭제' 팝업메뉴가 활성화되고, 동일하지 않을 경우 '신고' 메뉴가 활성화됩니다.
+  - 작성자가 동일할 경우 `수정/삭제` 팝업메뉴가 활성화되고, 동일하지 않을 경우 `신고` 메뉴가 활성화됩니다.
   - 신고 기능은 별도로 구현되지 않았으며, 계정이 다를경우에 대한 차별성을 두기 위해 제작하였습니다.
-  - 게시글 상품 상태를 '판매중' 상태와 '판매 완료' 상태로 변경 가능하며, 메인 페이지에서 확인 할 수 있습니다.
-  - '판매중','판매완료' 상태와 상품의 거래 위치 정보, 가격 정보 등은 검색을 통해 필터링할 수 있습니다.
+  - 게시글 상품 상태를 `판매중` 상태와 `판매 완료` 상태로 변경 가능하며, 메인 페이지에서 확인 할 수 있습니다.
+  - `판매중`,`판매완료` 상태와 상품의 거래 위치 정보, 가격 정보 등은 검색을 통해 필터링할 수 있습니다.
 
 
 
@@ -75,17 +75,16 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/bca200e0-5895-4
 
 <p float="left">
   <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/271ff6e8-9767-47d8-989b-7c7516473352" width="200"/>
-  <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/81dd4cc8-c4da-4ddb-a03f-3cf0a9e05657" width="200"/>
+  <img src="https://github.com/600GramsMarket/HangeunMarket/assets/109474668/cb5b3daa-2045-4f84-ba2e-a102ff088376" width="200"/>
 </p>
 
 - `Firebase RealtimeDatabase` 를 활용한 채팅기능
   - 상품의 구매 희망자는 판매자와 1대1 채팅이 가능합니다.
   - 사용자의 채팅이 실시간으로 반영되어 보여집니다.
  
+https://github.com/600GramsMarket/HangeunMarket/assets/109474668/bf06e135-3739-4fe2-948b-009a7655346b
 
-https://github.com/600GramsMarket/HangeunMarket/assets/109474668/ca55017d-4905-4bbf-88d6-eb12928158e4
 
- 
 ## 4. 상품 필터링 기능
 
 <p float="left">
@@ -104,9 +103,12 @@ https://github.com/600GramsMarket/HangeunMarket/assets/109474668/c718b745-7e1c-4
 
 <br><br>
 ## 🔨Used Skill
-<img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat&logo=kotlin&logoColor=white"/>
-<img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat&logo=androidstudio&logoColor=white"/>
-<img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"/>
+<p>
+  <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat&logo=kotlin&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat&logo=androidstudio&logoColor=white"/>
+  <img src="https://img.shields.io/badge/firebase-FFCA28?style=flat&logo=firebase&logoColor=white"/>
+</p>
+
 
 
 
