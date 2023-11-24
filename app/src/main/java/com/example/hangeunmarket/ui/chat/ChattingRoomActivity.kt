@@ -101,7 +101,6 @@ class ChattingRoomActivity : AppCompatActivity() {
         messageRecyclerView.layoutManager = LinearLayoutManager(this) //레이아웃 설정
         messageRecyclerView.adapter = messageRecyclerViewAdapter // 어댑터 부착
 
-
         // 대화 목록 가져오기
         database.child("chats").child(senderRoom).child("messages")
             .addValueEventListener(object :ValueEventListener{
@@ -112,6 +111,8 @@ class ChattingRoomActivity : AppCompatActivity() {
                     for(postSnapshat in snapshot.children){
                         val message = postSnapshat.getValue(Message::class.java)
                         messageList.add(message!!) //대화 삽입
+                        //리사이클러뷰 위치를 화면 아래로 댕기기 => 채팅 바로 확인 가능하도록
+                        messageRecyclerView.scrollToPosition(messageList.size - 1)
                     }
                     messageRecyclerViewAdapter.notifyDataSetChanged() // 데이터 변경여부 알리기
                 }
