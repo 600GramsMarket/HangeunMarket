@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.hangeunmarket.R
+import com.example.hangeunmarket.ui.dialog.LoadingDialogFragment
 import com.example.hangeunmarket.ui.home.recyclerview.SaleItem
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -75,6 +76,9 @@ class SaleWritingActivity : AppCompatActivity() {
         // 글 쓰기 완료시
         // 수정에 대한 로직 추가 작성 필요
         btnWriteDone.setOnClickListener {
+            val loadingDialog = LoadingDialogFragment() // 업로드 완료전까지 화면에 로딩창을 띄우기 위해
+            loadingDialog.show(supportFragmentManager, "loading") // 로딩창 띄우기
+
             val title = saleTitle.text.toString()
             val priceText = salePrice.text.toString()
             val price = priceText.toInt()
@@ -147,7 +151,9 @@ class SaleWritingActivity : AppCompatActivity() {
                                         intent.putExtra("saleItemImage",imageName) //판매 상품 이미지 이름
                                         Log.d("ImageTest","이미지 삽입")
 
+                                        loadingDialog.dismiss() // 로딩창 종료
                                         finish() //현재 엑티비티 종료
+
                                         startActivity(intent)
                                     }
                                 }
@@ -157,6 +163,7 @@ class SaleWritingActivity : AppCompatActivity() {
                                 // 수정하는 경우 기존 이미지 이름을 불러와서 그대로 삽입
                                 dbRef.child(it).child("saleItemImage").setValue(saleItemUri)
                                 intent.putExtra("saleItemImage",saleItemUri) //판매 상품 이미지 이름
+                                loadingDialog.dismiss() //로딩창 종료
                                 finish() //현재 엑티비티 종료
                                 startActivity(intent)
                             }
