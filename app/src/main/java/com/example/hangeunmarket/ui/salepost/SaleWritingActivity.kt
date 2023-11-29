@@ -45,6 +45,7 @@ class SaleWritingActivity : AppCompatActivity() {
 
     private lateinit var saleItemUri:String
 
+    private val loadingDialog = LoadingDialogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +77,6 @@ class SaleWritingActivity : AppCompatActivity() {
         // 글 쓰기 완료시
         // 수정에 대한 로직 추가 작성 필요
         btnWriteDone.setOnClickListener {
-            val loadingDialog = LoadingDialogFragment() // 업로드 완료전까지 화면에 로딩창을 띄우기 위해
             loadingDialog.show(supportFragmentManager, "loading") // 로딩창 띄우기
 
             val title = saleTitle.text.toString()
@@ -171,6 +171,9 @@ class SaleWritingActivity : AppCompatActivity() {
 
                         } else {
                             // 실패 시 로직
+                            Toast.makeText(this, "업로드에 실패하였습니다", Toast.LENGTH_SHORT).show()
+                            loadingDialog.dismiss() // 로딩창도 종료
+                            finish() // 실패시 엑티비티 종료
                         }
                     }
                 }
@@ -217,8 +220,6 @@ class SaleWritingActivity : AppCompatActivity() {
                         }
                     }
 
-
-
                     // UI 요소에 데이터 할당
                     saleTitle.setText(item.saleTitle)
                     salePrice.setText(item.salePrice.toString())
@@ -243,6 +244,7 @@ class SaleWritingActivity : AppCompatActivity() {
 
         ref.putFile(imageUri)
             .addOnSuccessListener {
+                loadingDialog.dismiss() //로딩창 종료
                 callback(filename) // 이미지 업로드 성공 시 콜백 호출
             }
             .addOnFailureListener {
